@@ -20,9 +20,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
 
-    private bool sceneIsLoaded = false;
+    private bool sceneLoadingComplete = false;
 
-    [SerializeField] private string TitleScreenSceneName;
+    private bool titleSceneLoaded = false;
+    private bool menuSceneLoaded = false;
+    private bool gameSceneLoaded = false;
+
+    [SerializeField] private string titleScreenSceneName;
+    [SerializeField] private string menuScreenSceneName;
+    [SerializeField] private string gameSceneName;
 
 
 
@@ -32,24 +38,20 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.LOADTITLE:
-                if(!sceneIsLoaded)
-                {
-                    StartCoroutine(LoadScene(TitleScreenSceneName));
-
-                    sceneIsLoaded = true;
-                }
-
-                sceneIsLoaded = false;
+                LoadTitleScene();
                 break;
             case GameState.TITLE:
                 break;
             case GameState.LOADMAINMENU:
+                LoadMenuScene();
                 break;
             case GameState.MAINMENU:
                 break;
             case GameState.STARTGAME:
+                LoadGameScene();
                 break;
             case GameState.PLAY:
+                PlayGameUpdate();   //Remove if unused
                 break;
             default:
                 break;
@@ -91,4 +93,119 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion Load and Unload Scenes
+
+
+
+
+
+    #region GameStateUpdates
+
+    /// <summary>
+    /// Loads title screen scene and unloads all other non-base scenes
+    /// </summary>
+    private void LoadTitleScene()
+    {
+        if (!sceneLoadingComplete)
+        {
+            if (menuSceneLoaded)
+            {
+                StartCoroutine(UnloadScene(menuScreenSceneName));
+                menuSceneLoaded = false;
+            }
+
+            if (gameSceneLoaded)
+            {
+                StartCoroutine(UnloadScene(gameSceneName));
+                gameSceneLoaded = false;
+            }
+
+            if (!titleSceneLoaded)
+            {
+                StartCoroutine(LoadScene(titleScreenSceneName));
+                titleSceneLoaded = true;
+            }
+
+
+            sceneLoadingComplete = true;
+        }
+
+        sceneLoadingComplete = false;
+    }
+
+    /// <summary>
+    /// Loads main menu screen scene and unloads all other non-base scenes
+    /// </summary>
+    private void LoadMenuScene()
+    {
+        if (!sceneLoadingComplete)
+        {
+            if (titleSceneLoaded)
+            {
+                StartCoroutine(UnloadScene(titleScreenSceneName));
+                titleSceneLoaded = false;
+            }
+
+            if (gameSceneLoaded)
+            {
+                StartCoroutine(UnloadScene(gameSceneName));
+                gameSceneLoaded = false;
+            }
+
+            if (!menuSceneLoaded)
+            {
+                StartCoroutine(LoadScene(menuScreenSceneName));
+                menuSceneLoaded = true;
+            }
+
+
+            sceneLoadingComplete = true;
+        }
+
+        sceneLoadingComplete = false;
+    }
+
+    /// <summary>
+    /// Loads game scene, unloads all other non-base scenes, and starts game
+    /// </summary>
+    private void LoadGameScene()
+    {
+        if (!sceneLoadingComplete)
+        {
+            if (titleSceneLoaded)
+            {
+                StartCoroutine(UnloadScene(titleScreenSceneName));
+                titleSceneLoaded = false;
+            }
+
+            if (menuSceneLoaded)
+            {
+                StartCoroutine(UnloadScene(menuScreenSceneName));
+                menuSceneLoaded = false;
+            }
+
+            if (!gameSceneLoaded)
+            {
+                StartCoroutine(LoadScene(gameSceneName));
+                gameSceneLoaded = true;
+            }
+
+
+            sceneLoadingComplete = true;
+        }
+
+        sceneLoadingComplete = false;
+    }
+
+    /// <summary>
+    /// Runs all necessary update game manager functions for core gameplay
+    /// </summary>
+    private void PlayGameUpdate()
+    {
+        //ANY GAME MANAGER CRITICAL LOGIC GOES HERE!!!
+    }
+
+
+    #endregion GameStateUpdates
+
+
 }
