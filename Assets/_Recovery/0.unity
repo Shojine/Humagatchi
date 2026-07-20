@@ -1497,7 +1497,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RagdollController
   bodyPart: {fileID: 346224222}
-  currentState: 1
 --- !u!1 &1949970122
 GameObject:
   m_ObjectHideFlags: 0
