@@ -16,7 +16,7 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-    public GameState gameState = GameState.LOADTITLE;
+    [HideInInspector] public GameState gameState = GameState.LOADTITLE;
     public static GameManager Instance { get; private set; }
 
 
@@ -26,10 +26,20 @@ public class GameManager : MonoBehaviour
     private bool menuSceneLoaded = false;
     private bool gameSceneLoaded = false;
 
+    private bool isHovering = false;
+    private IClickable clickableHovering = null;
+
+    [SerializeField] private GameState startingState = GameState.LOADTITLE;
+
     [SerializeField] private string titleScreenSceneName;
     [SerializeField] private string menuScreenSceneName;
     [SerializeField] private string gameSceneName;
 
+
+    private void Start()
+    {
+        gameState = startingState;
+    }
 
 
 
@@ -51,7 +61,7 @@ public class GameManager : MonoBehaviour
                 LoadGameScene();
                 break;
             case GameState.PLAY:
-                PlayGameUpdate();   //Remove if unused
+                PlayGameUpdate();
                 break;
             default:
                 break;
@@ -202,6 +212,37 @@ public class GameManager : MonoBehaviour
     private void PlayGameUpdate()
     {
         //ANY GAME MANAGER CRITICAL LOGIC GOES HERE!!!
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;                      
+        IClickable clickable = ((Physics.Raycast(ray, out hit))) ?  hit.collider.gameObject.GetComponent<IClickable>() : null;
+                
+        if(Physics.Raycast(ray, out hit)) Debug.Log("update");
+                
+        if (clickable != null)
+        {
+            Debug.Log("Clickable");
+        
+            if (Input.GetMouseButtonDown(0))
+            {
+                clickable.OnClicked();
+            }
+            else
+            {
+                if(!isHovering || clickable != clickableHovering)
+                {
+                    clickableHovering = clickable;
+                    isHovering = true;
+                    clickable.OnHoverStart();
+                }
+            }
+        }
+        else
+        {
+            clickableHovering?.OnHoverStop();
+            isHovering = false;
+            clickableHovering = null;
+        }
     }
 
 
