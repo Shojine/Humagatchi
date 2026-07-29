@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 115490495}
   m_Layer: 0
   m_Name: LeftWrist
-  m_TagString: Untagged
+  m_TagString: LooseLimb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -512,11 +512,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.54, z: 0}
---- !u!1 &346224222 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -516098083770646512, guid: 8c67d7e0bca758b49a276537da20a835, type: 3}
-  m_PrefabInstance: {fileID: 2017109800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &436676246 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4332706925441422008, guid: 8c67d7e0bca758b49a276537da20a835, type: 3}
@@ -734,7 +729,7 @@ GameObject:
   - component: {fileID: 514831641}
   m_Layer: 0
   m_Name: LeftArm
-  m_TagString: Untagged
+  m_TagString: LooseLimb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2950,6 +2945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1683385843}
+  - component: {fileID: 1683385844}
   m_Layer: 0
   m_Name: Charactero
   m_TagString: Untagged
@@ -2984,6 +2980,22 @@ Transform:
   - {fileID: 2010702837}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1683385844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683385842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b50bee9d1bc8d42841e1f4e8034deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollController
+  randomFallingPercentage: 50
+  standingPosition: []
+  standingRotation: []
+  currentState: 0
 --- !u!1 &1701300805
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,7 +3148,7 @@ GameObject:
   - component: {fileID: 1714670256}
   m_Layer: 0
   m_Name: RightArm
-  m_TagString: Untagged
+  m_TagString: LooseLimb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3835,7 +3847,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b50bee9d1bc8d42841e1f4e8034deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RagdollController
-  bodyPart: {fileID: 346224222}
+  randomFallingPercentage: 3
+  standingPosition: []
+  standingRotation: []
   currentState: 1
 --- !u!1 &1949970122
 GameObject:
@@ -3907,7 +3921,7 @@ GameObject:
   - component: {fileID: 2010702840}
   m_Layer: 0
   m_Name: RightWrist
-  m_TagString: Untagged
+  m_TagString: LooseLimb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
