@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     private bool menuSceneLoaded = false;
     private bool gameSceneLoaded = false;
 
+    private bool isValidSaveFile = false;
+
     private bool isHovering = false;
     private IClickable clickableHovering = null;
 
@@ -68,6 +70,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+
+    public void SetValidSaveFile(bool validSaveFile)
+    {
+        isValidSaveFile = validSaveFile;
+    }
 
 
     #region Load and Unload Scenes
