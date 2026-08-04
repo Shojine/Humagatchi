@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 
@@ -214,11 +215,24 @@ public class GameManager : MonoBehaviour
         //ANY GAME MANAGER CRITICAL LOGIC GOES HERE!!!
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;                      
-        IClickable clickable = ((Physics.Raycast(ray, out hit))) ?  hit.collider.gameObject.GetComponent<IClickable>() : null;
-                
+        RaycastHit hit;
+        IClickable clickable = ((Physics.Raycast(ray, out hit))) ?hit.collider.gameObject.GetComponent<IClickable>() : null;
+
+
+        Vector3 mousePos = Vector3.zero;
+        if(Mouse.current != null) mousePos = Mouse.current.position.ReadValue();
+
+        RaycastHit2D hit2D = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
+
+        IClickable clickable2D = (hit2D.collider != null) ? hit2D.collider.gameObject.GetComponent<IClickable>() : null;
+
+        if (clickable != null) Debug.Log(clickable.ToString());
+        if (clickable2D != null) Debug.Log(clickable2D.ToString());
+
+        Debug.DrawRay(ray.origin,Vector3.forward);
         if(Physics.Raycast(ray, out hit)) Debug.Log("update");
-                
+        if(Physics2D.Raycast(Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero)) Debug.Log("update2D");
+
         if (clickable != null)
         {
             Debug.Log("Clickable");
@@ -234,6 +248,32 @@ public class GameManager : MonoBehaviour
                     clickableHovering = clickable;
                     isHovering = true;
                     clickable.OnHoverStart();
+                }
+            }
+        }
+        else
+        {
+            clickableHovering?.OnHoverStop();
+            isHovering = false;
+            clickableHovering = null;
+        }
+
+        if(clickable2D != null)
+        {
+            Debug.Log("Clickable2D");
+        
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                Debug.Log("Clicked");
+                clickable2D.OnClicked();
+            }
+            else
+            {
+                if(!isHovering || clickable2D != clickableHovering)
+                {
+                    clickableHovering = clickable2D;
+                    isHovering = true;
+                    clickable2D.OnHoverStart();
                 }
             }
         }
