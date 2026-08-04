@@ -226,12 +226,7 @@ public class GameManager : MonoBehaviour
 
         IClickable clickable2D = (hit2D.collider != null) ? hit2D.collider.gameObject.GetComponent<IClickable>() : null;
 
-        if (clickable != null) Debug.Log(clickable.ToString());
-        if (clickable2D != null) Debug.Log(clickable2D.ToString());
-
         Debug.DrawRay(ray.origin,Vector3.forward);
-        if(Physics.Raycast(ray, out hit)) Debug.Log("update");
-        if(Physics2D.Raycast(Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero)) Debug.Log("update2D");
 
         if (clickable != null)
         {

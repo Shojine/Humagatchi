@@ -22,6 +22,9 @@ public class RagdollController : MonoBehaviour
     private Vector3[] standingPosition;
     private Vector3[] standingRotation;
     private bool isStanding = true;
+    private bool setupComplete = false;
+    private bool startStanding = false;
+    private float standingCooldown = 5;
 
     void Start()
     {
@@ -36,7 +39,15 @@ public class RagdollController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (startStanding && standingCooldown > 0)
+        {
+            standingCooldown -= 1 * Time.deltaTime;
+        }else if(standingCooldown <= 0)
+        {
+            startStanding = false;
+            standingCooldown = 5;
+            SetRagdollState(RagdollState.Standing);
+        }
     }
 
     
@@ -49,7 +60,8 @@ public class RagdollController : MonoBehaviour
 
     private void UpdateRagdollState()
     {
-        switch(currentState)
+        if (!setupComplete) return;
+        switch (currentState)
         {
             case RagdollState.Standing:
                 if (!isStanding)
@@ -78,9 +90,10 @@ public class RagdollController : MonoBehaviour
             case RagdollState.Fallen:
                 EnableBones(true);
                 isStanding = false;
-                StartCoroutine(StandUp());
+                startStanding = true;
                 break;
             case RagdollState.Slapped:
+                standingCooldown = 5;
                 EnableBones(true);
                 Vector3 mouseScreenPoz = Mouse.current.position.ReadValue();
                 mouseScreenPoz.z = Camera.main.WorldToScreenPoint(transform.position).z;
@@ -119,17 +132,8 @@ public class RagdollController : MonoBehaviour
         StartCoroutine(StateRoutine());
     }
 
-    private IEnumerator StandUp()
-    {
-        yield return new WaitForSeconds(5f);
-        currentState = RagdollState.Standing;
-        UpdateRagdollState();
-    }
-    
-
     private IEnumerator Setup()
     {
-
         EnableBones(false);
         yield return new WaitForSeconds(1);
         for (int i = 0; i < transform.childCount; i++)
@@ -137,10 +141,10 @@ public class RagdollController : MonoBehaviour
 
             standingPosition[i] = transform.GetChild(i).position;
             standingRotation[i] = transform.GetChild(i).rotation.eulerAngles;
-
         }
         SetRagdollState(currentState);
         StartCoroutine(StateRoutine());
+        setupComplete = true;
     }
 
 }
