@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,13 @@ public enum GameState
     PLAY
 }
 
+public enum Rooms
+{
+    LIVINGROOM,
+    KITCHEN,
+    BATHROOM,
+    BEDROOM
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -26,17 +34,38 @@ public class GameManager : MonoBehaviour
     private bool menuSceneLoaded = false;
     private bool gameSceneLoaded = false;
 
+    private bool isLoadingTitle = false;
+    private bool isLoadingMenu = false;
+    private bool isLoadingGame = false;
+    
+
     private bool isValidSaveFile = false;
 
     private bool isHovering = false;
     private IClickable clickableHovering = null;
 
+    private Dictionary<Rooms, string> roomSceneNames = new Dictionary<Rooms, string>();
+    private string currentSceneName = null;
+
+
     [SerializeField] private GameState startingState = GameState.LOADTITLE;
 
     [SerializeField] private string titleScreenSceneName;
     [SerializeField] private string menuScreenSceneName;
-    [SerializeField] private string gameSceneName;
+    [SerializeField] private string startingRoomSceneName;
+    [SerializeField] private string LivingRoomSceneName;
+    [SerializeField] private string KitchenSceneName;
+    [SerializeField] private string BathroomSceneName;
+    [SerializeField] private string BedroomSceneName;
 
+
+    private void Awake()
+    {
+        roomSceneNames.Add(Rooms.LIVINGROOM, LivingRoomSceneName);
+        roomSceneNames.Add(Rooms.BATHROOM, BathroomSceneName);
+        roomSceneNames.Add(Rooms.BEDROOM, BedroomSceneName);
+        roomSceneNames.Add(Rooms.KITCHEN, KitchenSceneName);
+    }
 
     private void Start()
     {
@@ -50,17 +79,29 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.LOADTITLE:
-                LoadTitleScene();
+                if(!isLoadingTitle)
+                {
+                    StartCoroutine(LoadTitleScene());
+                    isLoadingTitle = true;
+                }
                 break;
             case GameState.TITLE:
                 break;
             case GameState.LOADMAINMENU:
-                LoadMenuScene();
+                if(!isLoadingMenu)
+                {
+                    StartCoroutine(LoadMenuScene());
+                    isLoadingMenu = true;
+                }
                 break;
             case GameState.MAINMENU:
                 break;
             case GameState.STARTGAME:
-                LoadGameScene();
+                if(!isLoadingGame)
+                {
+                    StartCoroutine(LoadGameScene());
+                    isLoadingGame = true;
+                }
                 break;
             case GameState.PLAY:
                 PlayGameUpdate();
@@ -75,6 +116,11 @@ public class GameManager : MonoBehaviour
     public void SetValidSaveFile(bool validSaveFile)
     {
         isValidSaveFile = validSaveFile;
+    }
+
+    public void swapRoom(Rooms room)
+    {
+        StartCoroutine(LoadSceneByName(roomSceneNames[room]));
     }
 
 
@@ -112,7 +158,15 @@ public class GameManager : MonoBehaviour
 
     #endregion Load and Unload Scenes
 
-
+    private IEnumerator LoadSceneByName(string roomName)
+    {
+        if(currentSceneName != null)
+        {
+            yield return StartCoroutine(UnloadScene(currentSceneName));
+        }
+        yield return StartCoroutine(LoadScene(roomName));
+        currentSceneName = roomName;
+    }
 
 
 
@@ -121,97 +175,105 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Loads title screen scene and unloads all other non-base scenes
     /// </summary>
-    private void LoadTitleScene()
+    private IEnumerator LoadTitleScene()
     {
         if (!sceneLoadingComplete)
         {
-            if (menuSceneLoaded)
-            {
-                StartCoroutine(UnloadScene(menuScreenSceneName));
-                menuSceneLoaded = false;
-            }
+            //if (menuSceneLoaded)
+            //{
+            //    StartCoroutine(UnloadScene(menuScreenSceneName));
+            //    menuSceneLoaded = false;
+            //}
+            //
+            //if (gameSceneLoaded)
+            //{
+            //    StartCoroutine(UnloadScene(gameSceneName));
+            //    gameSceneLoaded = false;
+            //}
+            //
+            //if (!titleSceneLoaded)
+            //{
+            //    StartCoroutine(LoadScene(titleScreenSceneName));
+            //    titleSceneLoaded = true;
+            //}
 
-            if (gameSceneLoaded)
-            {
-                StartCoroutine(UnloadScene(gameSceneName));
-                gameSceneLoaded = false;
-            }
-
-            if (!titleSceneLoaded)
-            {
-                StartCoroutine(LoadScene(titleScreenSceneName));
-                titleSceneLoaded = true;
-            }
+            yield return LoadSceneByName(titleScreenSceneName);
 
 
             sceneLoadingComplete = true;
         }
 
         sceneLoadingComplete = false;
+        isLoadingTitle = false;
     }
 
     /// <summary>
     /// Loads main menu screen scene and unloads all other non-base scenes
     /// </summary>
-    private void LoadMenuScene()
+    private IEnumerator LoadMenuScene()
     {
         if (!sceneLoadingComplete)
         {
-            if (titleSceneLoaded)
-            {
-                StartCoroutine(UnloadScene(titleScreenSceneName));
-                titleSceneLoaded = false;
-            }
+            //if (titleSceneLoaded)
+            //{
+            //    StartCoroutine(UnloadScene(titleScreenSceneName));
+            //    titleSceneLoaded = false;
+            //}
+            //
+            //if (gameSceneLoaded)
+            //{
+            //    StartCoroutine(UnloadScene(gameSceneName));
+            //    gameSceneLoaded = false;
+            //}
+            //
+            //if (!menuSceneLoaded)
+            //{
+            //    StartCoroutine(LoadScene(menuScreenSceneName));
+            //    menuSceneLoaded = true;
+            //}
 
-            if (gameSceneLoaded)
-            {
-                StartCoroutine(UnloadScene(gameSceneName));
-                gameSceneLoaded = false;
-            }
-
-            if (!menuSceneLoaded)
-            {
-                StartCoroutine(LoadScene(menuScreenSceneName));
-                menuSceneLoaded = true;
-            }
-
+            yield return StartCoroutine(LoadSceneByName(menuScreenSceneName));
 
             sceneLoadingComplete = true;
         }
 
         sceneLoadingComplete = false;
+        isLoadingMenu = false;
     }
 
     /// <summary>
     /// Loads game scene, unloads all other non-base scenes, and starts game
     /// </summary>
-    private void LoadGameScene()
+    private IEnumerator LoadGameScene()
     {
         if (!sceneLoadingComplete)
         {
-            if (titleSceneLoaded)
-            {
-                StartCoroutine(UnloadScene(titleScreenSceneName));
-                titleSceneLoaded = false;
-            }
+            //if (titleSceneLoaded)
+            //{
+            //    StartCoroutine(UnloadScene(titleScreenSceneName));
+            //    titleSceneLoaded = false;
+            //}
+            //
+            //if (menuSceneLoaded)
+            //{
+            //    StartCoroutine(UnloadScene(menuScreenSceneName));
+            //    menuSceneLoaded = false;
+            //}
+            //
+            //if (!gameSceneLoaded)
+            //{
+            //    StartCoroutine(LoadScene(gameSceneName));
+            //    gameSceneLoaded = true;
+            //}
 
-            if (menuSceneLoaded)
-            {
-                StartCoroutine(UnloadScene(menuScreenSceneName));
-                menuSceneLoaded = false;
-            }
-
-            if (!gameSceneLoaded)
-            {
-                StartCoroutine(LoadScene(gameSceneName));
-                gameSceneLoaded = true;
-            }
+            yield return StartCoroutine(LoadSceneByName(startingRoomSceneName));
 
 
             sceneLoadingComplete = true;
         }
 
         sceneLoadingComplete = false;
+        isLoadingGame = false;
     }
 
     /// <summary>

@@ -151,9 +151,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameState: 0
   startingState: 4
-  titleScreenSceneName: 
-  menuScreenSceneName: 
-  gameSceneName: SampleScene
+  titleScreenSceneName: SampleScene
+  menuScreenSceneName: SampleScene
+  startingRoomSceneName: SampleScene
+  LivingRoomSceneName: SampleScene
+  KitchenSceneName: SampleScene
+  BathroomSceneName: SampleScene
+  BedroomSceneName: SampleScene
 --- !u!4 &1800685453
 Transform:
   m_ObjectHideFlags: 0
