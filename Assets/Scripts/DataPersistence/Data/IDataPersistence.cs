@@ -1,0 +1,16 @@
+using UnityEngine;
+
+public interface IDataPersistence
+{
+    /// <summary>
+    /// Intended to load data from GameData object
+    /// </summary>
+    /// <param name="data">The GameData object containing the data that needs to be loaded</param>
+    void LoadData(GameData data); //not ref because Load Data only needs to be read by other scripts
+
+    /// <summary>
+    /// Intended to save data to GameData object
+    /// </summary>
+    /// <param name="data">A reference to the GameData object that needs the data that is being saved</param>
+    void SaveData(ref GameData data); //ref because Save Data will be modified by other scripts
+}
