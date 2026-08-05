@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 65187676}
+  - component: {fileID: 65187678}
   - component: {fileID: 65187677}
   - component: {fileID: 65187675}
   - component: {fileID: 65187674}
@@ -239,7 +240,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65187672}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2836b8a961ae27e4dae4918311c92392, type: 3}
   m_Name: 
@@ -247,6 +248,19 @@ MonoBehaviour:
   renderer: {fileID: 65187674}
   baseMaterial: {fileID: 2100000, guid: 3a41489954cab404184f12b03b084bf9, type: 2}
   hoverMaterial: {fileID: 2100000, guid: 98cafcd310f13424d98564da4075740d, type: 2}
+--- !u!114 &65187678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65187672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ccdcb93033e7e4298bd10e92cd4473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomSwapClickableObject
+  room: 3
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,9 +556,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameState: 5
   startingState: 5
+  startingRoom: 0
   titleScreenSceneName: 
   menuScreenSceneName: 
-  gameSceneName: 
+  LivingRoomSceneName: 
+  KitchenSceneName: 
+  BathroomSceneName: 
+  BedroomSceneName: 
 --- !u!4 &1260853256
 Transform:
   m_ObjectHideFlags: 0
