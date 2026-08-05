@@ -21,31 +21,33 @@ public class RagdollController : MonoBehaviour
     private Rigidbody2D[] childRB2D;
     private Vector3[] standingPosition;
     private Vector3[] standingRotation;
+    private bool isStanding = true;
+    private bool setupComplete = false;
+    private bool startStanding = false;
+    private float standingCooldown = 5;
 
     void Start()
     {
-
         childRB2D = transform.GetComponentsInChildren<Rigidbody2D>();
-        SetRagdollState(currentState);
 
         standingPosition = new Vector3[transform.childCount];
         standingRotation = new Vector3[transform.childCount];
-        Debug.Log("Child Count: " + transform.childCount);
-        for (int i = 0; i < transform.childCount; i++)
-        {
+        StartCoroutine(Setup());
 
-            standingPosition[i] = transform.GetChild(i).position;
-            standingRotation[i] = transform.GetChild(i).rotation.eulerAngles;
-
-        }
-
-        StartCoroutine(stateRoutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        if (startStanding && standingCooldown > 0)
+        {
+            standingCooldown -= 1 * Time.deltaTime;
+        }else if(standingCooldown <= 0)
+        {
+            startStanding = false;
+            standingCooldown = 5;
+            SetRagdollState(RagdollState.Standing);
+        }
     }
 
     
@@ -58,20 +60,25 @@ public class RagdollController : MonoBehaviour
 
     private void UpdateRagdollState()
     {
-        switch(currentState)
+        if (!setupComplete) return;
+        switch (currentState)
         {
             case RagdollState.Standing:
-                for(int i = 0; i < transform.childCount; i++)
+                if (!isStanding)
                 {
-                    transform.GetChild(i).position = standingPosition[i];
-                    transform.GetChild(i).rotation = Quaternion.Euler(standingRotation[i]);
-                    Debug.DrawRay(standingPosition[i], Vector3.forward, Color.red, 5f);
+                    isStanding = true;
+                    EnableBones(false);
+
+                    for(int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).position = standingPosition[i];
+                        transform.GetChild(i).rotation = Quaternion.Euler(standingRotation[i]);
+                        Debug.DrawRay(standingPosition[i], Vector3.forward, Color.red, 5f);
+                    }
                 }
-                EnableBones(false);
                 currentState = RagdollState.Standing_Waiting;
                 break;
             case RagdollState.Standing_Waiting:
-                EnableBones(false);
                 if (UnityEngine.Random.Range(0, 100) < randomFallingPercentage)
                 {
                     currentState = RagdollState.Fallen;
@@ -82,9 +89,11 @@ public class RagdollController : MonoBehaviour
                 break;
             case RagdollState.Fallen:
                 EnableBones(true);
-                StartCoroutine(standUp());
+                isStanding = false;
+                startStanding = true;
                 break;
             case RagdollState.Slapped:
+                standingCooldown = 5;
                 EnableBones(true);
                 Vector3 mouseScreenPoz = Mouse.current.position.ReadValue();
                 mouseScreenPoz.z = Camera.main.WorldToScreenPoint(transform.position).z;
@@ -97,6 +106,7 @@ public class RagdollController : MonoBehaviour
                 {
                     rigidbody2D.AddForce(direction * force, ForceMode2D.Impulse);
                 }
+                SetRagdollState(RagdollState.Fallen);
                 break;
             case RagdollState.Dead:
                 EnableBones(true);
@@ -110,24 +120,31 @@ public class RagdollController : MonoBehaviour
         foreach (Rigidbody2D rb2D in childRB2D)
         {
             if (rb2D.CompareTag("LooseLimb")) continue;
-            rb2D.bodyType = isEnabled ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
+            rb2D.bodyType = isEnabled ? RigidbodyType2D.Dynamic : RigidbodyType2D.Static;
         }
     }
 
-    private IEnumerator stateRoutine()
+    private IEnumerator StateRoutine()
     {
         yield return new WaitForSeconds(3f);
         Debug.Log("State Routine Triggered");
         UpdateRagdollState();
-        StartCoroutine(stateRoutine());
+        StartCoroutine(StateRoutine());
     }
 
-    private IEnumerator standUp()
+    private IEnumerator Setup()
     {
-        yield return new WaitForSeconds(5f);
-        currentState = RagdollState.Standing;
-        UpdateRagdollState();
-    }
+        EnableBones(false);
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < transform.childCount; i++)
+        {
 
+            standingPosition[i] = transform.GetChild(i).position;
+            standingRotation[i] = transform.GetChild(i).rotation.eulerAngles;
+        }
+        SetRagdollState(currentState);
+        StartCoroutine(StateRoutine());
+        setupComplete = true;
+    }
 
 }
