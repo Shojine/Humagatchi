@@ -150,10 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameState: 0
-  startingState: 4
+  startingState: 2
   startingRoom: 0
   titleScreenSceneName: SampleScene
-  menuScreenSceneName: SampleScene
+  menuScreenSceneName: MainMenu
   LivingRoomSceneName: LaceTestScene
   KitchenSceneName: SampleScene
   BathroomSceneName: SampleScene
