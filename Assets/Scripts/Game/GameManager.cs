@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     private Dictionary<Rooms, string> roomSceneNames = new Dictionary<Rooms, string>();
     private string currentSceneName = null;
 
+    private bool isPaused = false;
+
 
     [SerializeField] private GameState startingState = GameState.LOADTITLE;
     [SerializeField] private Rooms startingRoom = Rooms.LIVINGROOM;
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string KitchenSceneName;
     [SerializeField] private string BathroomSceneName;
     [SerializeField] private string BedroomSceneName;
+
+    [SerializeField] private GameObject pausePanel;
 
 
     private void Awake()
@@ -80,6 +84,9 @@ public class GameManager : MonoBehaviour
         roomSceneNames.Add(Rooms.BATHROOM, BathroomSceneName);
         roomSceneNames.Add(Rooms.BEDROOM, BedroomSceneName);
         roomSceneNames.Add(Rooms.KITCHEN, KitchenSceneName);
+
+        pausePanel.SetActive(false);
+        isPaused = false;
     }
 
     private void Start()
@@ -137,6 +144,8 @@ public class GameManager : MonoBehaviour
     {
        isHovering = false;
        clickableHovering = null;
+        pausePanel.SetActive(false);
+        isPaused = false;
 
        StartCoroutine(LoadSceneByName(roomSceneNames[room]));
     }
@@ -197,6 +206,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private IEnumerator LoadTitleScene()
     {
+        pausePanel.SetActive(false);
+        isPaused = false;
+
         if (!sceneLoadingComplete)
         {
             //if (menuSceneLoaded)
@@ -233,6 +245,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private IEnumerator LoadMenuScene()
     {
+        pausePanel.SetActive(false);
+        isPaused = false;
+
         if (!sceneLoadingComplete)
         {
             //if (titleSceneLoaded)
@@ -268,6 +283,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private IEnumerator LoadGameScene()
     {
+        pausePanel.SetActive(false);
+        isPaused= false;
+
         if (!sceneLoadingComplete)
         {
             //if (titleSceneLoaded)
@@ -307,6 +325,14 @@ public class GameManager : MonoBehaviour
         //ANY GAME MANAGER CRITICAL LOGIC GOES HERE!!!
 
         if(isActivelyLoading) return;
+
+        //pause menu check
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            pausePanel.SetActive(true);
+            isPaused = true;
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -365,6 +391,7 @@ public class GameManager : MonoBehaviour
             clickableHovering = null;
         }
 
+
        //if(clickable2D != null)
        //{
        //    Debug.Log("Clickable2D");
@@ -396,4 +423,12 @@ public class GameManager : MonoBehaviour
     #endregion GameStateUpdates
 
 
+
+
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+        pausePanel.SetActive(false);
+        isPaused = false;
+    }
 }
