@@ -11,6 +11,8 @@ public class TestClickableObject : MonoBehaviour, IClickable
     public void OnClicked()
     {
         Debug.Log("Clicked");
+        GameManager.Instance.swapRoom(Rooms.KITCHEN);
+        //GameManager.Instance.gameState = GameState.PLAY;
     }
 
     public void OnHoverStart()
@@ -20,6 +22,7 @@ public class TestClickableObject : MonoBehaviour, IClickable
 
     public void OnHoverStop()
     {
+        print("Is Unhovering");
         renderer.material = baseMaterial;
     }
 }
