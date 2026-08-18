@@ -1,12 +1,11 @@
 {
   "dependencies": {
-    
     "com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#v2.0.7",
-    "com.hairibar.naughtyextensions": "https://github.com/hairibar/Hairibar.NaughtyExtensions.git#v1.3.0",
     "com.hairibar.engineextensions": "https://github.com/hairibar/Hairibar.EngineExtensions.git#v2.3.0",
+    "com.hairibar.naughtyextensions": "https://github.com/hairibar/Hairibar.NaughtyExtensions.git#v1.3.0",
     "com.hairibar.ragdoll": "https://github.com/hairibar/Hairibar.Ragdoll.git#upm",
-
     "com.unity.ai.navigation": "2.0.11",
+    "com.unity.behavior": "1.0.16",
     "com.unity.collab-proxy": "2.11.4",
     "com.unity.feature.2d": "2.0.2",
     "com.unity.ide.rider": "3.0.39",
