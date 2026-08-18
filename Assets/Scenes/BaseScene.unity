@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameState: 0
   startingState: 2
-  startingRoom: 3
+  startingRoom: 0
   titleScreenSceneName: SampleScene
   menuScreenSceneName: MainMenu
   LivingRoomSceneName: LaceTestScene
