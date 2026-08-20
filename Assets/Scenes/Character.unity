@@ -5984,7 +5984,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f0a7059d8818a47a9a6e7f0fb4b050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUDScript
-  titleScreenSceneName: 
+  healthSlider: {fileID: 0}
+  hungerSlider: {fileID: 0}
+  thirstSlider: {fileID: 0}
+  cleanlinessSlider: {fileID: 0}
+  energySlider: {fileID: 0}
+  happinessSlider: {fileID: 0}
+  entertainmentSlider: {fileID: 0}
+  fearSlider: {fileID: 0}
 --- !u!1 &1858589220
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,22 +1,37 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public struct HumanStateChange
 {
+    public float healthChange;
     public float hungerChange;
     public float thirstChange;
-    public float healthChange;
     public float cleanlinessChange;
     public float energyChange;
     public float happinessChange; //happiness to anger/sadness scale
-    public float fearChange;
     public float entertainmentChange;
+    public float fearChange;
 }
 
+
+public struct HumanState
+{
+    public float health;
+    public float hunger;
+    public float thirst;
+    public float cleanliness;
+    public float energy;
+    public float happiness; //happiness to anger/sadness scale
+    public float entertainment;
+    public float fear;
+}
 
 public class HumanStateManager : MonoBehaviour
 {
     private static HumanStateManager _instance;
     public static HumanStateManager Instance { get { return _instance; } }
+
+    private List<IHumanSubscriber> humanSubscribers = new List<IHumanSubscriber>();
 
     private float health = 100;
     private float hunger = 100;
@@ -246,6 +261,12 @@ public class HumanStateManager : MonoBehaviour
             {
                 fear -= (baseFearIncrease * 1.5f);
             }
+
+
+            if(changeOccured)
+            {
+                NotifyHumanSubscribers();
+            }    
         }
 
 
@@ -269,5 +290,40 @@ public class HumanStateManager : MonoBehaviour
         happiness += stateChange.happinessChange;
         entertainment += stateChange.entertainmentChange;
         fear += stateChange.fearChange;
+    }
+
+
+    public void SubscribeToHuman(IHumanSubscriber subscriber)
+    {
+        if(subscriber != null && !humanSubscribers.Contains(subscriber))
+        {
+            humanSubscribers.Add(subscriber);
+        }
+    }
+
+    public void UnsubscribeFromHUman(IHumanSubscriber subscriber)
+    {
+        if(subscriber != null && humanSubscribers.Contains(subscriber))
+        {
+            humanSubscribers.Remove(subscriber);
+        }
+    }
+
+    private void NotifyHumanSubscribers()
+    {
+        HumanState humanState = new HumanState();
+        humanState.health = health;
+        humanState.hunger = hunger;
+        humanState.thirst = thirst;
+        humanState.cleanliness = cleanliness;
+        humanState.energy = energy;
+        humanState.happiness = happiness;
+        humanState.entertainment = entertainment;
+        humanState.fear = fear;
+
+        foreach (var subscriber in humanSubscribers)
+        {
+            subscriber.updateHuman(humanState);
+        }
     }
 }
