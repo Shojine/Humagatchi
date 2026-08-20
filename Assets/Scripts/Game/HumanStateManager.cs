@@ -1,0 +1,273 @@
+using UnityEngine;
+
+public struct HumanStateChange
+{
+    public float hungerChange;
+    public float thirstChange;
+    public float healthChange;
+    public float cleanlinessChange;
+    public float energyChange;
+    public float happinessChange; //happiness to anger/sadness scale
+    public float fearChange;
+    public float entertainmentChange;
+}
+
+
+public class HumanStateManager : MonoBehaviour
+{
+    private static HumanStateManager _instance;
+    public static HumanStateManager Instance { get { return _instance; } }
+
+    private float health = 100;
+    private float hunger = 100;
+    private float thirst = 100;
+    private float cleanliness = 100;
+    private float energy = 100;
+    private float happiness = 100;
+    private float entertainment = 100;
+    private float fear = 100;
+
+
+    private float healthTimer = 100;
+    private float hungerTimer = 100;
+    private float thirstTimer = 100;
+    private float cleanlinessTimer = 100;
+    private float energyTimer = 100;
+    private float happinessTimer = 100;
+    private float entertainmentTimer = 100;
+    private float fearTimer = 100;
+
+
+    [SerializeField] private float healthChangeTime = 100;
+    [SerializeField] private float hungerDecreaseTime = 10;
+    [SerializeField] private float thirstDecreaseTime = 10;
+    [SerializeField] private float cleanlinessDecreaseTime = 20;
+    [SerializeField] private float energyChangeTime =15;
+    [SerializeField] private float happinessChangeTime = 12;
+    [SerializeField] private float entertainmentChangeTime = 7;
+    [SerializeField]  private float fearChangeTime = 40;
+
+    [SerializeField] private float baseHealthDecrease = 3;
+    [SerializeField] private float baseHungerDecrease = 2;
+    [SerializeField] private float baseThirstDecrease = 1;
+    [SerializeField] private float baseCleanlinessDecrease = 4;
+    [SerializeField] private float baseEnergyDecrease = 3;
+    [SerializeField] private float baseEntertainmentDecrease = 3;
+    [SerializeField] private float baseFearIncrease = 5;
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
+        healthTimer = healthChangeTime;
+        hungerTimer = hungerDecreaseTime;
+        thirstTimer = thirstDecreaseTime;
+        cleanlinessTimer = cleanlinessDecreaseTime;
+        energyTimer = energyChangeTime;
+        happinessTimer = happinessChangeTime;
+        entertainmentTimer = entertainmentChangeTime;
+        fearTimer = fearChangeTime;
+    }
+
+
+    private void Update()
+    {
+        if (GameManager.Instance.gameState != GameState.PLAY) return;
+
+        bool changeOccured = false;
+
+        healthTimer -= Time.deltaTime;
+        hungerTimer -= Time.deltaTime;
+        thirstTimer -= Time.deltaTime;
+        cleanlinessTimer -= Time.deltaTime;
+        energyTimer -= Time.deltaTime;
+        happinessTimer -= Time.deltaTime;
+        entertainmentTimer -= Time.deltaTime;
+        fearTimer -= Time.deltaTime;
+
+        if(healthTimer <= 0)
+        {
+            healthTimer = healthChangeTime;
+            changeOccured = true;
+
+            if(hunger <= 0)
+            {
+                health -= baseHealthDecrease;
+            }
+
+            if(thirst <= 0)
+            {
+                health -= baseHealthDecrease;
+            }
+
+            if(cleanliness <= 0)
+            {
+                health -= baseHealthDecrease;
+            }
+
+            if(energyTimer <= 0)
+            {
+                health -= baseHealthDecrease;
+            }
+
+            if(happiness <= 0)
+            {
+                health -= baseHealthDecrease;
+            }
+
+            //excluding entertainment here. Can put it in if we want
+
+            if(fear <= 0)
+            {
+                health -= baseHealthDecrease;
+            }
+
+        }
+
+        if(hungerTimer <= 0)
+        {
+            hungerTimer = hungerDecreaseTime;
+            changeOccured = true;
+
+
+            hunger -= baseHungerDecrease;
+        }    
+
+        if(thirstTimer <= 0)
+        {
+            thirstTimer = thirstDecreaseTime;
+            changeOccured = true;
+
+            thirst -= baseThirstDecrease;
+
+            if(hunger <= 20)
+            {
+                thirst -= (0.5f * baseThirstDecrease);
+            }
+        }
+
+        if(cleanlinessTimer <= 0)
+        {
+            cleanlinessTimer = cleanlinessDecreaseTime;
+            changeOccured = true;
+
+            cleanliness -= baseCleanlinessDecrease;
+
+            if(energy >= 75 && entertainment >= 75)
+            {
+                cleanliness -= (baseCleanlinessDecrease * 0.25f);
+            }
+        }
+
+        if(energyTimer <= 0)
+        {
+            energyTimer = energyChangeTime;
+            changeOccured = true;
+
+            energy -= baseEnergyDecrease;
+
+            if(hunger <= 25)
+            {
+                energy -= baseEnergyDecrease;
+            }
+
+            if(thirst <= 20)
+            {
+                energy -= (baseEnergyDecrease * 0.5f);
+            }
+        }
+
+        if (happinessTimer <= 0)
+        {
+            happinessTimer = happinessChangeTime;
+            changeOccured = true;
+
+            happiness = ((health + hunger + thirst + cleanliness + energy + entertainment) / 6) - fear;
+        }
+
+        if (entertainmentTimer <= 0)
+        {
+            entertainmentTimer = entertainmentChangeTime;
+            changeOccured = true;
+
+            entertainment -= baseEntertainmentDecrease;
+
+            if(energy <= 25)
+            {
+                entertainment -= (baseEntertainmentDecrease * 0.75f);
+            }
+        }
+
+        if (fearTimer <= 0)
+        {
+            fearTimer = fearChangeTime;
+            changeOccured = true;
+
+            if(health <= 20)
+            {
+                fear += (baseFearIncrease * 2);
+            } else if (health <= 50)
+            {
+                fear += baseFearIncrease;
+            }
+
+            if (hunger <= 5)
+            {
+                fear += (baseFearIncrease * 0.75f);
+            }
+            else if (hunger <= 25)
+            {
+                fear += (baseFearIncrease * 0.5f);
+            }
+
+            if (thirst <= 5)
+            {
+                fear += (baseFearIncrease * 1f);
+            }
+            else if (thirst <= 25)
+            {
+                fear += (baseFearIncrease * 0.75f);
+            }
+
+            if (entertainment >= 75 && health >= 75 && hunger >= 50 && thirst >= 50 && cleanliness >= 25)
+            {
+                fear -= (baseFearIncrease * 0.75f);
+            }
+
+            if (health >= 90 && hunger >= 85 && thirst >= 85 && cleanliness >= 50)
+            {
+                fear -= (baseFearIncrease * 1.5f);
+            }
+        }
+
+
+        //healthTimer
+        //hungerTimer
+        //thirstTimer
+        //cleanlinessTimer
+        //energyTimer
+        //happinessTimer
+        //entertainmentTimer
+        //fearTimer
+    }
+
+    public void ChangeHumanState(HumanStateChange stateChange)
+    {
+        health += stateChange.healthChange;
+        hunger += stateChange.hungerChange;
+        thirst += stateChange.thirstChange;
+        cleanliness += stateChange.cleanlinessChange;
+        energy += stateChange.energyChange;
+        happiness += stateChange.happinessChange;
+        entertainment += stateChange.entertainmentChange;
+        fear += stateChange.fearChange;
+    }
+}
