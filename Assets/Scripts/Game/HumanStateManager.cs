@@ -40,7 +40,7 @@ public class HumanStateManager : MonoBehaviour
     private float energy = 100;
     private float happiness = 100;
     private float entertainment = 100;
-    private float fear = 100;
+    private float fear = 0;
 
 
     private float healthTimer = 100;
@@ -52,6 +52,14 @@ public class HumanStateManager : MonoBehaviour
     private float entertainmentTimer = 100;
     private float fearTimer = 100;
 
+
+    [SerializeField] private float startingHealth = 100;
+    [SerializeField] private float startingHunger = 100;
+    [SerializeField] private float startingThirst = 100;
+    [SerializeField] private float startingCleanliness = 100;
+    [SerializeField] private float startingEnergy = 100;
+    [SerializeField] private float startingEntertainment = 100;
+    [SerializeField] private float startingFear = 0;
 
     [SerializeField] private float healthChangeTime = 100;
     [SerializeField] private float hungerDecreaseTime = 10;
@@ -149,6 +157,8 @@ public class HumanStateManager : MonoBehaviour
 
         if(hungerTimer <= 0)
         {
+            print("Changing Hunger");
+
             hungerTimer = hungerDecreaseTime;
             changeOccured = true;
 
@@ -263,12 +273,12 @@ public class HumanStateManager : MonoBehaviour
             }
 
 
-            if(changeOccured)
-            {
-                NotifyHumanSubscribers();
-            }    
         }
 
+        if(changeOccured)
+        {
+            NotifyHumanSubscribers();
+        }    
 
         //healthTimer
         //hungerTimer
@@ -325,5 +335,20 @@ public class HumanStateManager : MonoBehaviour
         {
             subscriber.updateHuman(humanState);
         }
+    }
+
+    public HumanState RequestHumanState()
+    {
+        HumanState humanState = new HumanState();
+        humanState.health = health;
+        humanState.hunger = hunger;
+        humanState.thirst = thirst;
+        humanState.cleanliness = cleanliness;
+        humanState.energy = energy;
+        humanState.happiness = happiness;
+        humanState.entertainment = entertainment;
+        humanState.fear = fear;
+
+        return humanState;
     }
 }
