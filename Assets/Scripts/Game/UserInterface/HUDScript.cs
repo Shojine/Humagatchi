@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
 
-public class HUDScript : MonoBehaviour, IHumanSubscriber
+public class HUDScript : MonoBehaviour, IHumanSubscriber, IGameSubscriber
 {
     [SerializeField] public Image testSlider;
     [SerializeField] public Image healthSlider;
@@ -13,6 +13,8 @@ public class HUDScript : MonoBehaviour, IHumanSubscriber
     [SerializeField] public Image happinessSlider;
     [SerializeField] public Image entertainmentSlider;
     [SerializeField] public Image fearSlider;
+
+    [SerializeField] public TMPro.TMP_Text moneyText;
 
     
     //[SerializeField] private string titleScreenSceneName;
@@ -31,17 +33,21 @@ public class HUDScript : MonoBehaviour, IHumanSubscriber
     private void Awake()
     {
         HumanStateManager.Instance.SubscribeToHuman(this);
+        GameManager.Instance.SubscribeToGame(this);
     }
 
     private void Start()
     {
         HumanState state = HumanStateManager.Instance.RequestHumanState();
         updateHuman(state);
+
+        updateMoney(GameManager.Instance.RequestTotalMoney());
     }
 
     private void OnDestroy()
     {
         HumanStateManager.Instance.UnsubscribeFromHUman(this);
+        GameManager.Instance.UnsubscribeFromGame(this);
     }
 
 
@@ -63,4 +69,8 @@ public class HUDScript : MonoBehaviour, IHumanSubscriber
         fearSlider.fillAmount = (state.fear/100.0f);
     }
 
+    public void updateMoney(int currentFunds)
+    {
+        moneyText.text = currentFunds.ToString();
+    }
 }

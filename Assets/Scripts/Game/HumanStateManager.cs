@@ -354,14 +354,45 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        health = data.HumanHealth;
-        hunger = data.HumanHunger;
-        thirst = data.HumanThirst;
-        cleanliness = data.HumanCleanliness;
-        energy = data.HumanEnergy;
-        happiness = data.HumanHappiness;
-        entertainment = data.HumanEntertainment;
-        fear = data.HumanFear;
+        if(data.HumanHealth >=0)
+        {
+            health = data.HumanHealth;
+        }
+
+        if(data.HumanHunger >= 0)
+        {
+            hunger = data.HumanHunger;
+        }
+
+        if(data.HumanThirst >= 0)
+        {
+            thirst = data.HumanThirst;
+        }
+
+        if(data.HumanCleanliness >= 0)
+        {
+            cleanliness = data.HumanCleanliness;
+        }
+
+        if(data.HumanEnergy >= 0)
+        {
+            energy = data.HumanEnergy;
+        }
+
+        if(data.HumanHappiness >= 0)
+        {
+            happiness = data.HumanHappiness;
+        }
+
+        if(data.HumanEntertainment >= 0)
+        {
+            entertainment = data.HumanEntertainment;
+        }
+
+        if(data.HumanFear >= 0)
+        {
+            fear = data.HumanFear;
+        }
     }
 
     public void SaveData(ref GameData data)

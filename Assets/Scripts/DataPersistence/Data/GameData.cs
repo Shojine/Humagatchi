@@ -16,6 +16,9 @@ public class GameData
     public float HumanEntertainment = -1;
     public float HumanFear = -1;
 
+
+    public int totalFunds = -1;
+
     //public SerializableDictionary<string, bool> boolData = new SerializableDictionary<string, bool>();
     //public SerializableDictionary<string, int> intData = new SerializableDictionary<string, int>();
     //public SerializableDictionary<string, float> floatData = new SerializableDictionary<string, float>();

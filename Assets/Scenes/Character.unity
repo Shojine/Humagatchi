@@ -1717,6 +1717,7 @@ MonoBehaviour:
   happinessSlider: {fileID: 1419158999}
   entertainmentSlider: {fileID: 1073307077}
   fearSlider: {fileID: 1331102017}
+  moneyText: {fileID: 2047030342}
 --- !u!1 &561308541
 GameObject:
   m_ObjectHideFlags: 0

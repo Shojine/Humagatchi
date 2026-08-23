@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Mathematics.Geometry;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.SceneManagement;
+using static UnityEngine.EventSystems.EventTrigger;
 
 
 public enum GameState
@@ -23,13 +28,16 @@ public enum Rooms
     BEDROOM
 }
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistence
 {
     [HideInInspector] public GameState gameState = GameState.LOADTITLE;
     // public static GameManager Instance { get; private set; }
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+    private List<IGameSubscriber> gameSubscribers = new List<IGameSubscriber>();
+
+    private int totalMoney = 500;
 
     private bool sceneLoadingComplete = false;
 
@@ -430,5 +438,66 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         pausePanel.SetActive(false);
         isPaused = false;
+    }
+
+    /// <summary>
+    /// Adds an amount of money to the total amount. (Use negative numbers to subtract money)
+    /// </summary>
+    /// <param name="amount">How much money being added (or removed if negative)</param>
+    /// <returns>false if money removed exceeds total funds. True otherwise.</returns>
+    public bool AddMoney(int amount)
+    {
+        if (amount < 0)
+        {
+            if((amount * -1) > totalMoney)
+                return false;
+        }
+
+        totalMoney += amount;
+        NotifyGameSubscribersMoneyChange();
+
+        return true;
+    }
+
+    public int RequestTotalMoney()
+    {
+        return totalMoney;
+    }
+
+
+    public void SubscribeToGame(IGameSubscriber subscriber)
+    {
+        if (subscriber != null && !gameSubscribers.Contains(subscriber))
+        {
+            gameSubscribers.Add(subscriber);
+        }
+    }
+
+    public void UnsubscribeFromGame(IGameSubscriber subscriber)
+    {
+        if (subscriber != null && gameSubscribers.Contains(subscriber))
+        {
+            gameSubscribers.Remove(subscriber);
+        }
+    }
+    private void NotifyGameSubscribersMoneyChange()
+    {
+        foreach (var subscriber in gameSubscribers)
+        {
+            subscriber.updateMoney(totalMoney);
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        if(data.totalFunds >=0)
+        {
+            totalMoney = data.totalFunds;
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.totalFunds = totalMoney;
     }
 }
