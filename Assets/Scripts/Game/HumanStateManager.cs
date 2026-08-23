@@ -26,7 +26,7 @@ public struct HumanState
     public float fear;
 }
 
-public class HumanStateManager : MonoBehaviour
+public class HumanStateManager : MonoBehaviour, IDataPersistence
 {
     private static HumanStateManager _instance;
     public static HumanStateManager Instance { get { return _instance; } }
@@ -350,5 +350,29 @@ public class HumanStateManager : MonoBehaviour
         humanState.fear = fear;
 
         return humanState;
+    }
+
+    public void LoadData(GameData data)
+    {
+        health = data.HumanHealth;
+        hunger = data.HumanHunger;
+        thirst = data.HumanThirst;
+        cleanliness = data.HumanCleanliness;
+        energy = data.HumanEnergy;
+        happiness = data.HumanHappiness;
+        entertainment = data.HumanEntertainment;
+        fear = data.HumanFear;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.HumanHealth = health;
+        data.HumanHunger = hunger;
+        data.HumanThirst = thirst;
+        data.HumanCleanliness = cleanliness;
+        data.HumanEnergy = energy;
+        data.HumanHappiness = happiness;
+        data.HumanEntertainment = entertainment;
+        data.HumanFear = fear;
     }
 }
