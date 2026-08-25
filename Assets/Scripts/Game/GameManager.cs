@@ -28,6 +28,12 @@ public enum Rooms
     BEDROOM
 }
 
+public enum AmPm
+{
+    AM,
+    PM
+}
+
 public class GameManager : MonoBehaviour, IDataPersistence
 {
     [HideInInspector] public GameState gameState = GameState.LOADTITLE;
@@ -61,7 +67,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private string currentSceneName = null;
 
     private bool isPaused = false;
+    public bool isNotLoading = true;
 
+    private float timeTimer;
+    private int currentHour;
+    private int currentMinute;
+    private AmPm timeAmPm;
+    private int currentDay = 0;
 
     [SerializeField] private GameState startingState = GameState.LOADTITLE;
     [SerializeField] private Rooms startingRoom = Rooms.LIVINGROOM;
@@ -76,6 +88,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     [SerializeField] private GameObject pausePanel;
 
+    [SerializeField] private float TimeChangeTimer = 5.0f;
+    [SerializeField] private int TimeChangeIncrement = 5;
+    [SerializeField] private int defaultStartHour = 12;
+    [SerializeField] private int defaultStartMinute = 30;
+    [SerializeField] private AmPm defaultStartAmPm = AmPm.PM;
+
+    [SerializeField] private int startingMoney = 500;
 
     private void Awake()
     {
@@ -95,6 +114,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
         pausePanel.SetActive(false);
         isPaused = false;
+
+        timeTimer = TimeChangeTimer;
+        currentHour = defaultStartHour;
+        currentMinute = defaultStartMinute;
+        timeAmPm = defaultStartAmPm;
+
+        totalMoney = startingMoney;
     }
 
     private void Start()
@@ -342,6 +368,35 @@ public class GameManager : MonoBehaviour, IDataPersistence
             isPaused = true;
         }
 
+
+        //Time changing
+        timeTimer -= Time.deltaTime;
+        if(timeTimer <= 0)
+        {
+            timeTimer = TimeChangeTimer;
+            currentMinute += TimeChangeIncrement;
+
+            if(currentMinute >= 60)
+            {
+                currentHour++;
+                currentMinute %= 60;
+
+                if(currentHour > 12)
+                {
+                    currentHour = 1;
+
+                } else if(currentHour == 12)
+                {
+                    timeAmPm = (timeAmPm == AmPm.AM)? AmPm.PM : AmPm.AM;
+                    if(timeAmPm == AmPm.AM) currentDay++;
+                }
+
+            }
+            NotifyGameSubscribersTimeChange();
+        }
+
+
+        //Hovering and clicking things in the scene
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         IClickable clickable = ((Physics.Raycast(ray, out hit))) ?hit.collider.gameObject.GetComponent<IClickable>() : null;
@@ -464,6 +519,26 @@ public class GameManager : MonoBehaviour, IDataPersistence
         return totalMoney;
     }
 
+    public int RequestHour()
+    {
+        return currentHour;
+    }
+
+    public int RequestMinute()
+    {
+        return currentMinute;
+    }
+
+    public AmPm requestAmPm()
+    {
+        return timeAmPm;
+    }
+
+    public int requestDay()
+    {
+        return currentDay;
+    }
+
 
     public void SubscribeToGame(IGameSubscriber subscriber)
     {
@@ -488,16 +563,56 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    private void NotifyGameSubscribersTimeChange()
+    {
+        foreach(var subscriber in gameSubscribers)
+        {
+            subscriber.updateTime(currentHour, currentMinute, currentDay, timeAmPm);
+        }
+    }
+
     public void LoadData(GameData data)
     {
         if(data.totalFunds >=0)
         {
             totalMoney = data.totalFunds;
         }
+
+        if(data.hour >= 0)
+        {
+            currentHour = data.hour;
+            currentMinute = data.minute;
+            timeTimer = data.timeTimer;
+            timeAmPm = data.timeAmPm;
+            currentDay = data.day;
+        }
     }
 
     public void SaveData(ref GameData data)
     {
         data.totalFunds = totalMoney;
+        data.hour = currentHour;
+        data.minute = currentMinute;
+        data.timeTimer = timeTimer;
+        data.timeAmPm = timeAmPm;
+        data.day = currentDay;
+    }
+
+
+    public void Reset()
+    {
+        totalMoney = startingMoney;
+
+        timeTimer = TimeChangeTimer;
+        currentHour = defaultStartHour;
+        currentMinute = defaultStartMinute;
+        timeAmPm = defaultStartAmPm;
+
+        currentDay = 0;
+    }
+
+    public void LoadGame()
+    {
+        DataPersistenceManager.Instance.LoadGame();
     }
 }

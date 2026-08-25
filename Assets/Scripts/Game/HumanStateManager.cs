@@ -300,6 +300,8 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         happiness += stateChange.happinessChange;
         entertainment += stateChange.entertainmentChange;
         fear += stateChange.fearChange;
+
+        NotifyHumanSubscribers();
     }
 
 
@@ -405,5 +407,17 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         data.HumanHappiness = happiness;
         data.HumanEntertainment = entertainment;
         data.HumanFear = fear;
+    }
+
+    public void Reset()
+    {
+        health = startingHealth;
+        hunger = startingHunger;
+        thirst = startingThirst;
+        cleanliness = startingCleanliness;
+        energy = startingEnergy;
+        happiness = 100;
+        entertainment = startingEntertainment;
+        fear = startingFear;
     }
 }

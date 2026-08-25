@@ -18,6 +18,11 @@ public class GameData
 
 
     public int totalFunds = -1;
+    public int hour = -1;
+    public int minute = -1;
+    public AmPm timeAmPm;
+    public float timeTimer = -1;
+    public int day = -1;
 
     //public SerializableDictionary<string, bool> boolData = new SerializableDictionary<string, bool>();
     //public SerializableDictionary<string, int> intData = new SerializableDictionary<string, int>();

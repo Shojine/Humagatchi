@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
@@ -15,6 +16,8 @@ public class HUDScript : MonoBehaviour, IHumanSubscriber, IGameSubscriber
     [SerializeField] public Image fearSlider;
 
     [SerializeField] public TMPro.TMP_Text moneyText;
+    [SerializeField] public TMPro.TMP_Text timeText;
+    [SerializeField] public TMPro.TMP_Text dayText;
 
     
     //[SerializeField] private string titleScreenSceneName;
@@ -42,6 +45,7 @@ public class HUDScript : MonoBehaviour, IHumanSubscriber, IGameSubscriber
         updateHuman(state);
 
         updateMoney(GameManager.Instance.RequestTotalMoney());
+        updateTime(GameManager.Instance.RequestHour(), GameManager.Instance.RequestMinute(), GameManager.Instance.requestDay(), GameManager.Instance.requestAmPm());
     }
 
     private void OnDestroy()
@@ -72,5 +76,30 @@ public class HUDScript : MonoBehaviour, IHumanSubscriber, IGameSubscriber
     public void updateMoney(int currentFunds)
     {
         moneyText.text = currentFunds.ToString();
+    }
+
+    public void updateTime(int hour, int minute, int day, AmPm amPm)
+    {
+        StringBuilder timeSb = new StringBuilder();
+
+        timeSb.Append(hour.ToString());
+        timeSb.Append(":");
+        if (minute < 10) timeSb.Append("0");
+        timeSb.Append(minute.ToString());
+        if (amPm == AmPm.AM)
+        {
+            timeSb.Append("am");
+        }
+        else
+        {
+            timeSb.Append("pm");
+        }
+
+        string timeString = timeSb.ToString();
+        timeText.text = timeString;
+
+        StringBuilder daySb = new StringBuilder();
+
+        dayText.text = "Day " + day.ToString();
     }
 }

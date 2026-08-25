@@ -9,4 +9,5 @@ public interface IHumanSubscriber
 public interface IGameSubscriber
 {
     public void updateMoney(int currentFunds);
+    public void updateTime(int hour, int minute, int day, AmPm amPm);
 }

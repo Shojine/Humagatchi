@@ -1049,6 +1049,11 @@ MonoBehaviour:
   BathroomSceneName: SampleScene
   BedroomSceneName: Character
   pausePanel: {fileID: 1261926357}
+  TimeChangeTimer: 5
+  TimeChangeIncrement: 5
+  defaultStartHour: 12
+  defaultStartMinute: 0
+  defaultStartAmPm: 1
 --- !u!4 &1800685453
 Transform:
   m_ObjectHideFlags: 0
@@ -1076,7 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42112c8b971d58949a292f53a4ff512f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataPersistenceManager
-  m_fileName: Test
+  m_fileName: SaveFile
   m_useEncryption: 0
   m_encryptionCodeWord: DefaultCodeWord
   m_saveOnQuit: 0
@@ -1121,6 +1126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9aa208df7b5ec14aac8978efac37720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HumanStateManager
+  startingHealth: 100
+  startingHunger: 100
+  startingThirst: 100
+  startingCleanliness: 100
+  startingEnergy: 100
+  startingEntertainment: 100
+  startingFear: 0
   healthChangeTime: 100
   hungerDecreaseTime: 10
   thirstDecreaseTime: 10
