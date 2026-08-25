@@ -539,6 +539,53 @@ public class GameManager : MonoBehaviour, IDataPersistence
         return currentDay;
     }
 
+    public void AddTime(int day, int hour, int minute)
+    {
+        currentDay += day;
+
+        currentMinute += TimeChangeIncrement;
+
+        if (currentMinute >= 60)
+        {
+            currentHour++;
+            currentMinute %= 60;
+
+            if (currentHour > 12)
+            {
+                currentHour = 1;
+
+            }
+            else if (currentHour == 12)
+            {
+                timeAmPm = (timeAmPm == AmPm.AM) ? AmPm.PM : AmPm.AM;
+                if (timeAmPm == AmPm.AM) currentDay++;
+            }
+
+        }
+
+        currentHour += hour;
+
+        if(hour >=12)
+        {
+            print(":'(");   
+        }
+
+        if (currentHour > 12)
+        {
+            currentHour = 1;
+            currentHour %= 12;
+
+            timeAmPm = (timeAmPm == AmPm.AM) ? AmPm.PM : AmPm.AM;
+        }
+        else if (currentHour == 12)
+        {
+            timeAmPm = (timeAmPm == AmPm.AM) ? AmPm.PM : AmPm.AM;
+            if (timeAmPm == AmPm.AM) currentDay++;
+        }
+
+        NotifyGameSubscribersTimeChange();
+
+    }
 
     public void SubscribeToGame(IGameSubscriber subscriber)
     {
