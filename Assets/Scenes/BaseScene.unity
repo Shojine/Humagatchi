@@ -1047,7 +1047,7 @@ MonoBehaviour:
   LivingRoomSceneName: LaceTestScene
   KitchenSceneName: SampleScene
   BathroomSceneName: SampleScene
-  BedroomSceneName: Character
+  BedroomSceneName: BedRoom
   pausePanel: {fileID: 1261926357}
 --- !u!4 &1800685453
 Transform:
