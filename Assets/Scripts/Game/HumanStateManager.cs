@@ -65,10 +65,10 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
     [SerializeField] private float hungerDecreaseTime = 10;
     [SerializeField] private float thirstDecreaseTime = 10;
     [SerializeField] private float cleanlinessDecreaseTime = 20;
-    [SerializeField] private float energyChangeTime =15;
+    [SerializeField] private float energyChangeTime = 15;
     [SerializeField] private float happinessChangeTime = 12;
     [SerializeField] private float entertainmentChangeTime = 7;
-    [SerializeField]  private float fearChangeTime = 40;
+    [SerializeField] private float fearChangeTime = 40;
 
     [SerializeField] private float baseHealthDecrease = 3;
     [SerializeField] private float baseHungerDecrease = 2;
@@ -89,6 +89,16 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         {
             _instance = this;
         }
+
+        if (startingHealth <= 100 && startingHealth >= 0) health = startingHealth;
+        if (startingHunger <= 100 && startingHunger >= 0) hunger = startingHunger;
+        if (startingThirst <= 100 && startingThirst >= 0) thirst = startingThirst;
+        if (startingCleanliness <= 100 && startingCleanliness >= 0) cleanliness = startingCleanliness;
+        if (startingEnergy <= 100 && startingEnergy >= 0) energy = startingEnergy;
+        if (startingEntertainment <= 100 && startingEntertainment >= 0) entertainment = startingEntertainment;
+        if (startingFear <= 100 && startingFear >= 0) fear = startingFear;
+
+        happiness = ((health + hunger + thirst + cleanliness + energy + entertainment) / 6) - fear;
 
         healthTimer = healthChangeTime;
         hungerTimer = hungerDecreaseTime;
@@ -116,46 +126,46 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         entertainmentTimer -= Time.deltaTime;
         fearTimer -= Time.deltaTime;
 
-        if(healthTimer <= 0)
+        if (healthTimer <= 0)
         {
             healthTimer = healthChangeTime;
             changeOccured = true;
 
-            if(hunger <= 0)
+            if (hunger <= 0)
             {
                 health -= baseHealthDecrease;
             }
 
-            if(thirst <= 0)
+            if (thirst <= 0)
             {
                 health -= baseHealthDecrease;
             }
 
-            if(cleanliness <= 0)
+            if (cleanliness <= 0)
             {
                 health -= baseHealthDecrease;
             }
 
-            if(energyTimer <= 0)
+            if (energyTimer <= 0)
             {
                 health -= baseHealthDecrease;
             }
 
-            if(happiness <= 0)
+            if (happiness <= 0)
             {
                 health -= baseHealthDecrease;
             }
 
             //excluding entertainment here. Can put it in if we want
 
-            if(fear <= 0)
+            if (fear <= 0)
             {
                 health -= baseHealthDecrease;
             }
 
         }
 
-        if(hungerTimer <= 0)
+        if (hungerTimer <= 0)
         {
             print("Changing Hunger");
 
@@ -164,47 +174,47 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
 
 
             hunger -= baseHungerDecrease;
-        }    
+        }
 
-        if(thirstTimer <= 0)
+        if (thirstTimer <= 0)
         {
             thirstTimer = thirstDecreaseTime;
             changeOccured = true;
 
             thirst -= baseThirstDecrease;
 
-            if(hunger <= 20)
+            if (hunger <= 20)
             {
                 thirst -= (0.5f * baseThirstDecrease);
             }
         }
 
-        if(cleanlinessTimer <= 0)
+        if (cleanlinessTimer <= 0)
         {
             cleanlinessTimer = cleanlinessDecreaseTime;
             changeOccured = true;
 
             cleanliness -= baseCleanlinessDecrease;
 
-            if(energy >= 75 && entertainment >= 75)
+            if (energy >= 75 && entertainment >= 75)
             {
                 cleanliness -= (baseCleanlinessDecrease * 0.25f);
             }
         }
 
-        if(energyTimer <= 0)
+        if (energyTimer <= 0)
         {
             energyTimer = energyChangeTime;
             changeOccured = true;
 
             energy -= baseEnergyDecrease;
 
-            if(hunger <= 25)
+            if (hunger <= 25)
             {
                 energy -= baseEnergyDecrease;
             }
 
-            if(thirst <= 20)
+            if (thirst <= 20)
             {
                 energy -= (baseEnergyDecrease * 0.5f);
             }
@@ -225,7 +235,7 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
 
             entertainment -= baseEntertainmentDecrease;
 
-            if(energy <= 25)
+            if (energy <= 25)
             {
                 entertainment -= (baseEntertainmentDecrease * 0.75f);
             }
@@ -236,10 +246,11 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
             fearTimer = fearChangeTime;
             changeOccured = true;
 
-            if(health <= 20)
+            if (health <= 20)
             {
                 fear += (baseFearIncrease * 2);
-            } else if (health <= 50)
+            }
+            else if (health <= 50)
             {
                 fear += baseFearIncrease;
             }
@@ -272,13 +283,13 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
                 fear -= (baseFearIncrease * 1.5f);
             }
 
-
+            if (fear > 100) fear = 100;
         }
 
-        if(changeOccured)
+        if (changeOccured)
         {
             NotifyHumanSubscribers();
-        }    
+        }
 
         //healthTimer
         //hungerTimer
@@ -301,13 +312,22 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         entertainment += stateChange.entertainmentChange;
         fear += stateChange.fearChange;
 
+        if (health > 100) health = 100;
+        if (hunger > 100) hunger = 100;
+        if (thirst > 100) thirst = 100;
+        if (cleanliness > 100) cleanliness = 100;
+        if (energy > 100) energy = 100;
+        if (happiness > 100) happiness = 100;
+        if (entertainment > 100) entertainment = 100;
+        if (fear > 100) fear = 100;
+
         NotifyHumanSubscribers();
     }
 
 
     public void SubscribeToHuman(IHumanSubscriber subscriber)
     {
-        if(subscriber != null && !humanSubscribers.Contains(subscriber))
+        if (subscriber != null && !humanSubscribers.Contains(subscriber))
         {
             humanSubscribers.Add(subscriber);
         }
@@ -315,7 +335,7 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
 
     public void UnsubscribeFromHUman(IHumanSubscriber subscriber)
     {
-        if(subscriber != null && humanSubscribers.Contains(subscriber))
+        if (subscriber != null && humanSubscribers.Contains(subscriber))
         {
             humanSubscribers.Remove(subscriber);
         }
@@ -356,45 +376,56 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        if(data.HumanHealth >=0)
+        if (data.HumanHealth >= 0)
         {
             health = data.HumanHealth;
         }
 
-        if(data.HumanHunger >= 0)
+        if (data.HumanHunger >= 0)
         {
             hunger = data.HumanHunger;
         }
 
-        if(data.HumanThirst >= 0)
+        if (data.HumanThirst >= 0)
         {
             thirst = data.HumanThirst;
         }
 
-        if(data.HumanCleanliness >= 0)
+        if (data.HumanCleanliness >= 0)
         {
             cleanliness = data.HumanCleanliness;
         }
 
-        if(data.HumanEnergy >= 0)
+        if (data.HumanEnergy >= 0)
         {
             energy = data.HumanEnergy;
         }
 
-        if(data.HumanHappiness >= 0)
+        if (data.HumanHappiness >= 0)
         {
             happiness = data.HumanHappiness;
         }
 
-        if(data.HumanEntertainment >= 0)
+        if (data.HumanEntertainment >= 0)
         {
             entertainment = data.HumanEntertainment;
         }
 
-        if(data.HumanFear >= 0)
+        if (data.HumanFear >= 0)
         {
             fear = data.HumanFear;
         }
+
+        if (health > 100) health = 100;
+        if (hunger > 100) hunger = 100;
+        if (thirst > 100) thirst = 100;
+        if (cleanliness > 100) cleanliness = 100;
+        if (energy > 100) energy = 100;
+        if (happiness > 100) happiness = 100;
+        if (entertainment > 100) entertainment = 100;
+        if (fear > 100) fear = 100;
+
+        NotifyHumanSubscribers();
     }
 
     public void SaveData(ref GameData data)
@@ -416,8 +447,10 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         thirst = startingThirst;
         cleanliness = startingCleanliness;
         energy = startingEnergy;
-        happiness = 100;
         entertainment = startingEntertainment;
         fear = startingFear;
+        happiness = ((health + hunger + thirst + cleanliness + energy + entertainment) / 6) - fear;
+
+        NotifyHumanSubscribers();
     }
 }
