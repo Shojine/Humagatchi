@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LaceTestScene.unity
     guid: cba464eeb775081429453835548c35c6
   - enabled: 1
-    path: Assets/Scenes/Character.unity
+    path: Assets/Scenes/BedRoom.unity
     guid: 1586bef490528954cba6205b617d1731
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity

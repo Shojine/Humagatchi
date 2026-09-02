@@ -15,6 +15,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OnSaveClick()
     {
-        print("Save Button Clicked. Not Yet Functional.");
+        //print("Save Button Clicked. Not Yet Functional.");
+        DataPersistenceManager.Instance.SaveGame();
     }
 }

@@ -1,22 +1,37 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public struct HumanStateChange
 {
+    public float healthChange;
     public float hungerChange;
     public float thirstChange;
-    public float healthChange;
     public float cleanlinessChange;
     public float energyChange;
     public float happinessChange; //happiness to anger/sadness scale
-    public float fearChange;
     public float entertainmentChange;
+    public float fearChange;
 }
 
 
-public class HumanStateManager : MonoBehaviour
+public struct HumanState
+{
+    public float health;
+    public float hunger;
+    public float thirst;
+    public float cleanliness;
+    public float energy;
+    public float happiness; //happiness to anger/sadness scale
+    public float entertainment;
+    public float fear;
+}
+
+public class HumanStateManager : MonoBehaviour, IDataPersistence
 {
     private static HumanStateManager _instance;
     public static HumanStateManager Instance { get { return _instance; } }
+
+    private List<IHumanSubscriber> humanSubscribers = new List<IHumanSubscriber>();
 
     private float health = 100;
     private float hunger = 100;
@@ -25,7 +40,7 @@ public class HumanStateManager : MonoBehaviour
     private float energy = 100;
     private float happiness = 100;
     private float entertainment = 100;
-    private float fear = 100;
+    private float fear = 0;
 
 
     private float healthTimer = 100;
@@ -37,6 +52,14 @@ public class HumanStateManager : MonoBehaviour
     private float entertainmentTimer = 100;
     private float fearTimer = 100;
 
+
+    [SerializeField] private float startingHealth = 100;
+    [SerializeField] private float startingHunger = 100;
+    [SerializeField] private float startingThirst = 100;
+    [SerializeField] private float startingCleanliness = 100;
+    [SerializeField] private float startingEnergy = 100;
+    [SerializeField] private float startingEntertainment = 100;
+    [SerializeField] private float startingFear = 0;
 
     [SerializeField] private float healthChangeTime = 100;
     [SerializeField] private float hungerDecreaseTime = 10;
@@ -134,6 +157,8 @@ public class HumanStateManager : MonoBehaviour
 
         if(hungerTimer <= 0)
         {
+            print("Changing Hunger");
+
             hungerTimer = hungerDecreaseTime;
             changeOccured = true;
 
@@ -246,8 +271,14 @@ public class HumanStateManager : MonoBehaviour
             {
                 fear -= (baseFearIncrease * 1.5f);
             }
+
+
         }
 
+        if(changeOccured)
+        {
+            NotifyHumanSubscribers();
+        }    
 
         //healthTimer
         //hungerTimer
@@ -269,5 +300,124 @@ public class HumanStateManager : MonoBehaviour
         happiness += stateChange.happinessChange;
         entertainment += stateChange.entertainmentChange;
         fear += stateChange.fearChange;
+
+        NotifyHumanSubscribers();
+    }
+
+
+    public void SubscribeToHuman(IHumanSubscriber subscriber)
+    {
+        if(subscriber != null && !humanSubscribers.Contains(subscriber))
+        {
+            humanSubscribers.Add(subscriber);
+        }
+    }
+
+    public void UnsubscribeFromHUman(IHumanSubscriber subscriber)
+    {
+        if(subscriber != null && humanSubscribers.Contains(subscriber))
+        {
+            humanSubscribers.Remove(subscriber);
+        }
+    }
+
+    private void NotifyHumanSubscribers()
+    {
+        HumanState humanState = new HumanState();
+        humanState.health = health;
+        humanState.hunger = hunger;
+        humanState.thirst = thirst;
+        humanState.cleanliness = cleanliness;
+        humanState.energy = energy;
+        humanState.happiness = happiness;
+        humanState.entertainment = entertainment;
+        humanState.fear = fear;
+
+        foreach (var subscriber in humanSubscribers)
+        {
+            subscriber.updateHuman(humanState);
+        }
+    }
+
+    public HumanState RequestHumanState()
+    {
+        HumanState humanState = new HumanState();
+        humanState.health = health;
+        humanState.hunger = hunger;
+        humanState.thirst = thirst;
+        humanState.cleanliness = cleanliness;
+        humanState.energy = energy;
+        humanState.happiness = happiness;
+        humanState.entertainment = entertainment;
+        humanState.fear = fear;
+
+        return humanState;
+    }
+
+    public void LoadData(GameData data)
+    {
+        if(data.HumanHealth >=0)
+        {
+            health = data.HumanHealth;
+        }
+
+        if(data.HumanHunger >= 0)
+        {
+            hunger = data.HumanHunger;
+        }
+
+        if(data.HumanThirst >= 0)
+        {
+            thirst = data.HumanThirst;
+        }
+
+        if(data.HumanCleanliness >= 0)
+        {
+            cleanliness = data.HumanCleanliness;
+        }
+
+        if(data.HumanEnergy >= 0)
+        {
+            energy = data.HumanEnergy;
+        }
+
+        if(data.HumanHappiness >= 0)
+        {
+            happiness = data.HumanHappiness;
+        }
+
+        if(data.HumanEntertainment >= 0)
+        {
+            entertainment = data.HumanEntertainment;
+        }
+
+        if(data.HumanFear >= 0)
+        {
+            fear = data.HumanFear;
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.HumanHealth = health;
+        data.HumanHunger = hunger;
+        data.HumanThirst = thirst;
+        data.HumanCleanliness = cleanliness;
+        data.HumanEnergy = energy;
+        data.HumanHappiness = happiness;
+        data.HumanEntertainment = entertainment;
+        data.HumanFear = fear;
+    }
+
+    public void Reset()
+    {
+        health = startingHealth;
+        hunger = startingHunger;
+        thirst = startingThirst;
+        cleanliness = startingCleanliness;
+        energy = startingEnergy;
+        happiness = 100;
+        entertainment = startingEntertainment;
+        fear = startingFear;
     }
 }

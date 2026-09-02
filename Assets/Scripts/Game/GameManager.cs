@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Mathematics.Geometry;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.SceneManagement;
+using static UnityEngine.EventSystems.EventTrigger;
 
 
 public enum GameState
@@ -23,13 +28,22 @@ public enum Rooms
     BEDROOM
 }
 
-public class GameManager : MonoBehaviour
+public enum AmPm
+{
+    AM,
+    PM
+}
+
+public class GameManager : MonoBehaviour, IDataPersistence
 {
     [HideInInspector] public GameState gameState = GameState.LOADTITLE;
     // public static GameManager Instance { get; private set; }
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+    private List<IGameSubscriber> gameSubscribers = new List<IGameSubscriber>();
+
+    private int totalMoney = 500;
 
     private bool sceneLoadingComplete = false;
 
@@ -53,7 +67,13 @@ public class GameManager : MonoBehaviour
     private string currentSceneName = null;
 
     private bool isPaused = false;
+    public bool isNotLoading = true;
 
+    private float timeTimer;
+    private int currentHour;
+    private int currentMinute;
+    private AmPm timeAmPm;
+    private int currentDay = 0;
 
     [SerializeField] private GameState startingState = GameState.LOADTITLE;
     [SerializeField] private Rooms startingRoom = Rooms.LIVINGROOM;
@@ -68,6 +88,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject pausePanel;
 
+    [SerializeField] private float TimeChangeTimer = 5.0f;
+    [SerializeField] private int TimeChangeIncrement = 5;
+    [SerializeField] private int defaultStartHour = 12;
+    [SerializeField] private int defaultStartMinute = 30;
+    [SerializeField] private AmPm defaultStartAmPm = AmPm.PM;
+
+    [SerializeField] private int startingMoney = 500;
 
     private void Awake()
     {
@@ -87,6 +114,13 @@ public class GameManager : MonoBehaviour
 
         pausePanel.SetActive(false);
         isPaused = false;
+
+        timeTimer = TimeChangeTimer;
+        currentHour = defaultStartHour;
+        currentMinute = defaultStartMinute;
+        timeAmPm = defaultStartAmPm;
+
+        totalMoney = startingMoney;
     }
 
     private void Start()
@@ -334,6 +368,35 @@ public class GameManager : MonoBehaviour
             isPaused = true;
         }
 
+
+        //Time changing
+        timeTimer -= Time.deltaTime;
+        if(timeTimer <= 0)
+        {
+            timeTimer = TimeChangeTimer;
+            currentMinute += TimeChangeIncrement;
+
+            if(currentMinute >= 60)
+            {
+                currentHour++;
+                currentMinute %= 60;
+
+                if(currentHour > 12)
+                {
+                    currentHour = 1;
+
+                } else if(currentHour == 12)
+                {
+                    timeAmPm = (timeAmPm == AmPm.AM)? AmPm.PM : AmPm.AM;
+                    if(timeAmPm == AmPm.AM) currentDay++;
+                }
+
+            }
+            NotifyGameSubscribersTimeChange();
+        }
+
+
+        //Hovering and clicking things in the scene
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         IClickable clickable = ((Physics.Raycast(ray, out hit))) ?hit.collider.gameObject.GetComponent<IClickable>() : null;
@@ -430,5 +493,173 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         pausePanel.SetActive(false);
         isPaused = false;
+    }
+
+    /// <summary>
+    /// Adds an amount of money to the total amount. (Use negative numbers to subtract money)
+    /// </summary>
+    /// <param name="amount">How much money being added (or removed if negative)</param>
+    /// <returns>false if money removed exceeds total funds. True otherwise.</returns>
+    public bool AddMoney(int amount)
+    {
+        if (amount < 0)
+        {
+            if((amount * -1) > totalMoney)
+                return false;
+        }
+
+        totalMoney += amount;
+        NotifyGameSubscribersMoneyChange();
+
+        return true;
+    }
+
+    public int RequestTotalMoney()
+    {
+        return totalMoney;
+    }
+
+    public int RequestHour()
+    {
+        return currentHour;
+    }
+
+    public int RequestMinute()
+    {
+        return currentMinute;
+    }
+
+    public AmPm requestAmPm()
+    {
+        return timeAmPm;
+    }
+
+    public int requestDay()
+    {
+        return currentDay;
+    }
+
+    public void AddTime(int day, int hour, int minute)
+    {
+        currentDay += day;
+
+        currentMinute += TimeChangeIncrement;
+
+        if (currentMinute >= 60)
+        {
+            currentHour++;
+            currentMinute %= 60;
+
+            if (currentHour > 12)
+            {
+                currentHour = 1;
+
+            }
+            else if (currentHour == 12)
+            {
+                timeAmPm = (timeAmPm == AmPm.AM) ? AmPm.PM : AmPm.AM;
+                if (timeAmPm == AmPm.AM) currentDay++;
+            }
+
+        }
+
+        currentHour += hour;
+
+        if(hour >=12)
+        {
+            print(":'(");   
+        }
+
+        if (currentHour > 12)
+        {
+            currentHour = 1;
+            currentHour %= 12;
+
+            timeAmPm = (timeAmPm == AmPm.AM) ? AmPm.PM : AmPm.AM;
+        }
+        else if (currentHour == 12)
+        {
+            timeAmPm = (timeAmPm == AmPm.AM) ? AmPm.PM : AmPm.AM;
+            if (timeAmPm == AmPm.AM) currentDay++;
+        }
+
+        NotifyGameSubscribersTimeChange();
+
+    }
+
+    public void SubscribeToGame(IGameSubscriber subscriber)
+    {
+        if (subscriber != null && !gameSubscribers.Contains(subscriber))
+        {
+            gameSubscribers.Add(subscriber);
+        }
+    }
+
+    public void UnsubscribeFromGame(IGameSubscriber subscriber)
+    {
+        if (subscriber != null && gameSubscribers.Contains(subscriber))
+        {
+            gameSubscribers.Remove(subscriber);
+        }
+    }
+    private void NotifyGameSubscribersMoneyChange()
+    {
+        foreach (var subscriber in gameSubscribers)
+        {
+            subscriber.updateMoney(totalMoney);
+        }
+    }
+
+    private void NotifyGameSubscribersTimeChange()
+    {
+        foreach(var subscriber in gameSubscribers)
+        {
+            subscriber.updateTime(currentHour, currentMinute, currentDay, timeAmPm);
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        if(data.totalFunds >=0)
+        {
+            totalMoney = data.totalFunds;
+        }
+
+        if(data.hour >= 0)
+        {
+            currentHour = data.hour;
+            currentMinute = data.minute;
+            timeTimer = data.timeTimer;
+            timeAmPm = data.timeAmPm;
+            currentDay = data.day;
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.totalFunds = totalMoney;
+        data.hour = currentHour;
+        data.minute = currentMinute;
+        data.timeTimer = timeTimer;
+        data.timeAmPm = timeAmPm;
+        data.day = currentDay;
+    }
+
+
+    public void Reset()
+    {
+        totalMoney = startingMoney;
+
+        timeTimer = TimeChangeTimer;
+        currentHour = defaultStartHour;
+        currentMinute = defaultStartMinute;
+        timeAmPm = defaultStartAmPm;
+
+        currentDay = 0;
+    }
+
+    public void LoadGame()
+    {
+        DataPersistenceManager.Instance.LoadGame();
     }
 }

@@ -4,12 +4,31 @@ using UnityEngine;
 [System.Serializable] //Data cannot be serialized to JSON format without this! 
 public class GameData
 {
-    //Data Types
-    public SerializableDictionary<string, bool> boolData = new SerializableDictionary<string, bool>();
-    public SerializableDictionary<string, int> intData = new SerializableDictionary<string, int>();
-    public SerializableDictionary<string, float> floatData = new SerializableDictionary<string, float>();
-    public SerializableDictionary<string, string> stringData = new SerializableDictionary<string, string>();
-    public SerializableDictionary<string, Vector3> vector3Data = new SerializableDictionary<string, Vector3>();
-    public SerializableDictionary<string, Quaternion> quaternionData = new SerializableDictionary<string, Quaternion>();
-    public SerializableDictionary<string, List<string>> stringListData = new SerializableDictionary<string, List<string>>();
+    ////Data Types
+    ///
+
+    public float HumanHealth = -1;
+    public float HumanHunger = -1;
+    public float HumanThirst = -1;
+    public float HumanCleanliness = -1;
+    public float HumanEnergy = -1;
+    public float HumanHappiness = -1;
+    public float HumanEntertainment = -1;
+    public float HumanFear = -1;
+
+
+    public int totalFunds = -1;
+    public int hour = -1;
+    public int minute = -1;
+    public AmPm timeAmPm;
+    public float timeTimer = -1;
+    public int day = -1;
+
+    //public SerializableDictionary<string, bool> boolData = new SerializableDictionary<string, bool>();
+    //public SerializableDictionary<string, int> intData = new SerializableDictionary<string, int>();
+    //public SerializableDictionary<string, float> floatData = new SerializableDictionary<string, float>();
+    //public SerializableDictionary<string, string> stringData = new SerializableDictionary<string, string>();
+    //public SerializableDictionary<string, Vector3> vector3Data = new SerializableDictionary<string, Vector3>();
+    //public SerializableDictionary<string, Quaternion> quaternionData = new SerializableDictionary<string, Quaternion>();
+    //public SerializableDictionary<string, List<string>> stringListData = new SerializableDictionary<string, List<string>>();
 }
