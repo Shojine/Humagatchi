@@ -10,7 +10,7 @@ public class HumanBodyPart : MonoBehaviour
 
     void Reset() => targetCamera = Camera.main;
 
-    void LateUpdate()
+    void Update()
     {
         if (targetCamera == null) targetCamera = Camera.main;
         if (targetCamera == null || boneStart == null) return;
