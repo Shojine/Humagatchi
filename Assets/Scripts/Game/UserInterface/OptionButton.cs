@@ -1,79 +1,71 @@
 using TMPro;
 using UnityEngine;
 
-public enum InteractionType
-{
-    PURCHASE,
-    ACTIVITY,
-    ACTION
-}
-
 public class OptionButton : MonoBehaviour
 { 
     [SerializeField] private GameObject moneys;
     [SerializeField] private GameObject hours;
     [SerializeField] private GameObject mood;
+    [SerializeField] private GameObject moodArrow;
 
     [SerializeField] private TMP_Text optionText;
     [SerializeField] private TMP_Text moneysText;
     [SerializeField] private TMP_Text hoursText;
 
-    // TEMPORARY should be randomized actions later
-    [SerializeField] private string optionName;
-    [SerializeField] private InteractionType interactionType;
-    [SerializeField] private int cost;
-    [SerializeField] private float healthChange;
-    [SerializeField] private float hungerChange;
-    [SerializeField] private float thirstChange;
-    [SerializeField] private float cleanlinessChange;
-    [SerializeField] private float energyChange;
-    [SerializeField] private float happinessChange; //happiness to anger/sadness scale
-    [SerializeField] private float entertainmentChange;
-    [SerializeField] private float fearChange;
+    private ActionOption currentAction;
 
     void Start()
     {
-        optionText.text = optionName;
+        PickNewAction();
+    }
+
+    public void PickNewAction()
+    {
+        ActionOption newAction = ResourceManager.Instance.GetAction();
+
+        optionText.text = newAction.name;
 
         moneys.SetActive(false);
         hours.SetActive(false);
         mood.SetActive(false);
 
-        switch (interactionType)
+        switch (newAction.type)
         {
-            case InteractionType.PURCHASE: 
+            case "purchase":
                 moneys.SetActive(true);
-                moneysText.text = cost.ToString();
+                moneysText.text = newAction.cost.ToString();
                 break;
-            case InteractionType.ACTIVITY:
+            case "activity":
                 hours.SetActive(true);
-                hoursText.text = $"{cost} hrs";
+                hoursText.text = $"{newAction.cost} hrs";
                 break;
-            case InteractionType.ACTION:
+            case "action":
                 mood.SetActive(true);
+                if (newAction.changes.happinessChange > 0)
+                {
+                    if (moodArrow.transform.rotation.x != 180) moodArrow.transform.Rotate(Vector3.left, 180);
+                }
+                else
+                {
+                    if (moodArrow.transform.rotation.x != 0) moodArrow.transform.Rotate(Vector3.left, 180);
+                }
                 break;
         }
+
+        if (currentAction != null) ResourceManager.Instance.FreeAction(currentAction);
+        currentAction = newAction;
     }
 
     public void OnClick()
     {
-        if (interactionType == InteractionType.PURCHASE)
+        if (currentAction.type == "purchase")
         {
-            if (GameManager.Instance.RequestTotalMoney() >= cost) GameManager.Instance.AddMoney(-cost);
+            if (GameManager.Instance.RequestTotalMoney() >= currentAction.cost) GameManager.Instance.AddMoney(-currentAction.cost);
             else return;
         }
-        else if (interactionType == InteractionType.ACTIVITY) GameManager.Instance.AddTime(0, cost, 0);
+        else if (currentAction.type == "activity") GameManager.Instance.AddTime(0, currentAction.cost, 0);
 
-        HumanStateChange stateChange = new();
-        stateChange.healthChange = healthChange;
-        stateChange.hungerChange = hungerChange;
-        stateChange.thirstChange = thirstChange;
-        stateChange.cleanlinessChange = cleanlinessChange;
-        stateChange.energyChange = energyChange;
-        stateChange.happinessChange = happinessChange;
-        stateChange.entertainmentChange = entertainmentChange;
-        stateChange.fearChange = fearChange;
-
-        HumanStateManager.Instance.ChangeHumanState(stateChange);
+        HumanStateManager.Instance.ChangeHumanState(currentAction.changes);
+        PickNewAction();
     }
 }
