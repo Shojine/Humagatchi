@@ -576,6 +576,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             currentHour %= 12;
 
             timeAmPm = (timeAmPm == AmPm.AM) ? AmPm.PM : AmPm.AM;
+            if (timeAmPm == AmPm.AM) currentDay++;
         }
         else if (currentHour == 12)
         {
