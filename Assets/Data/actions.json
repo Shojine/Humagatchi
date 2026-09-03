@@ -1,0 +1,43 @@
+{
+    "actions": [
+        {
+            "name": "Buy it a \"mars bar\"",
+            "type": "purchase",
+            "cost": 1000,
+            "changes": {
+                "hungerChange": 20,
+                "energyChange":  10,
+                "happinessChange": 10
+            }
+        },
+        {
+            "name": "Buy it a Q'lorbx's Gleksklor",
+            "type": "purchase",
+            "cost": 400,
+            "changes": {
+                "healthChange": -30,
+                "hungerChange": 30,
+                "energyChange":  10,
+                "happinessChange": -40
+            }
+        },
+        {
+            "name": "Play fetch",
+            "type": "activity",
+            "cost": 3,
+            "changes": {
+                "energyChange": -20,
+                "happinessChange": 10,
+                "entertainmentChange": 30
+            }
+        },
+        {
+            "name": "Threaten to send it to the ice wind desert",
+            "type": "action",
+            "changes": {
+                "happinessChange": -30,
+                "fearChange": 25
+            }
+        }
+    ]
+}
