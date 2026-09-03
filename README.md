@@ -16,6 +16,11 @@ Though you’ll come to find humans are quite a handful. In this pet simulator y
 - Locate the *builds* folder
 - Click the exe and run
 
+# Running the project
+## Dependencies
+- Unity 6000.3.12f1
 
-
-
+- Clone the Repo
+- Open Hub
+- Locate the Project folder
+- Open 
