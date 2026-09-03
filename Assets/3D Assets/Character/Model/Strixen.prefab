@@ -193,7 +193,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 1, y: 0.8, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4015764346968609400
 Rigidbody:
@@ -221,7 +221,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &5234603492946654588
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -230,15 +230,15 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275041375883499080}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 4723980052166370410}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
-  m_YMotion: 1
+  m_YMotion: 2
   m_ZMotion: 2
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -265,13 +265,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -442,7 +442,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 0.8, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2857198408363786330
 Rigidbody:
@@ -470,7 +470,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &1220415457416513081
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -479,15 +479,15 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639484824273477084}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 4723980052166370410}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0.5, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
-  m_YMotion: 1
+  m_YMotion: 2
   m_ZMotion: 2
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -514,13 +514,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -791,7 +791,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 1, y: 0.8, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8439544347124598851
 Rigidbody:
@@ -819,7 +819,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &6180210815866452708
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -828,15 +828,15 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2431429363893936421}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 4723980052166370410}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
-  m_YMotion: 1
+  m_YMotion: 2
   m_ZMotion: 2
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -863,13 +863,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -975,7 +975,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 1, y: 0.8, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6313174572852511826
 Rigidbody:
@@ -1003,7 +1003,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &1838033660156726964
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1012,15 +1012,15 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2587843644748172475}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 8439544347124598851}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
-  m_YMotion: 1
+  m_YMotion: 2
   m_ZMotion: 2
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -1047,13 +1047,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -1337,7 +1337,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 0.8, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3612878459487368808
 Rigidbody:
@@ -1365,7 +1365,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &6867391141419037134
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1374,15 +1374,15 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3186755387022055183}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 3206253460953026659}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Anchor: {x: -0.5, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
-  m_YMotion: 1
+  m_YMotion: 2
   m_ZMotion: 2
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -1409,13 +1409,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -1660,7 +1660,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 0.8, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3206253460953026659
 Rigidbody:
@@ -1688,7 +1688,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &1782235261026458609
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -1697,15 +1697,15 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3998330119647476290}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 4723980052166370410}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: -0.5, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
-  m_YMotion: 1
+  m_YMotion: 2
   m_ZMotion: 2
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -1732,13 +1732,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -2562,7 +2562,7 @@ MonoBehaviour:
   angularDrag: 0.05
   material: {fileID: 0}
   interpolation: 1
-  collisionDetectionMode: 0
+  collisionDetectionMode: 1
   solverIterations: 20
   _powerProfile: {fileID: 11400000, guid: 36b8b6bb19b4325479999cb8bcdad850, type: 2}
   _weightDistribution: {fileID: 11400000, guid: c9e4d128c927227479413219f3674d8b, type: 2}
@@ -2956,7 +2956,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 0.8, y: 0.8, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7989955508365136560
 Rigidbody:
@@ -2984,7 +2984,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &643786161194641544
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -2993,9 +2993,9 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7268149224031835379}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 4723980052166370410}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: -0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
@@ -3028,13 +3028,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -3140,7 +3140,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 1, y: 0.8, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3573980341623740170
 Rigidbody:
@@ -3168,7 +3168,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &7599343725063250771
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -3177,15 +3177,15 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7503570712512555872}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 4015764346968609400}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
-  m_YMotion: 1
+  m_YMotion: 2
   m_ZMotion: 2
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -3212,13 +3212,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -3324,7 +3324,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 0.8, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &9100175278121183083
 Rigidbody:
@@ -3352,7 +3352,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &1158170264533782490
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -3361,15 +3361,15 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7562836324118089157}
   serializedVersion: 4
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 2857198408363786330}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0.5, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
-  m_YMotion: 1
+  m_YMotion: 2
   m_ZMotion: 2
   m_AngularXMotion: 2
   m_AngularYMotion: 2
@@ -3396,13 +3396,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
@@ -3899,7 +3899,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.5}
+  m_Size: {x: 0.8, y: 0.8, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4723980052166370410
 Rigidbody:
@@ -3927,7 +3927,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &1979666070112561134
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -3971,13 +3971,13 @@ ConfigurableJoint:
     spring: 700
     damper: 56
   m_AngularYLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_AngularZLimit:
-    limit: 0
+    limit: 10
     bounciness: 0.3
-    contactDistance: 0
+    contactDistance: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
