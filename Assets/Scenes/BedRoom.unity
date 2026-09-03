@@ -770,34 +770,382 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 455579545902391988, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 643786161194641544, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 643786161194641544, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 643786161194641544, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 643786161194641544, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158170264533782490, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158170264533782490, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158170264533782490, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158170264533782490, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160619340769710581, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 1195874964302994506, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.531073
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195874964302994506, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.166178
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195874964302994506, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.096306205
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220415457416513081, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220415457416513081, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220415457416513081, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220415457416513081, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268920292415139253, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 1405801485395246346, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 1782235261026458609, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782235261026458609, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782235261026458609, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782235261026458609, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838033660156726964, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838033660156726964, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838033660156726964, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838033660156726964, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 1869900141140707233, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_Name
       value: Strixen
       objectReference: {fileID: 0}
+    - target: {fileID: 1909504408531204635, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.14477731
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909504408531204635, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.178679
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909504408531204635, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5841509
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979666070112561134, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979666070112561134, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979666070112561134, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979666070112561134, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 2268531994220884808, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 2634926832874015966, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 2745943291339677133, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.491065
+      objectReference: {fileID: 0}
+    - target: {fileID: 2745943291339677133, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.726045
+      objectReference: {fileID: 0}
+    - target: {fileID: 2745943291339677133, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.008942485
+      objectReference: {fileID: 0}
+    - target: {fileID: 2790250070962959455, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 2857198408363786330, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863439136994830304, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_RotationAtRest.y
+      value: 4.2144413
+      objectReference: {fileID: 0}
+    - target: {fileID: 2928185755385661800, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.00000081659596
+      objectReference: {fileID: 0}
     - target: {fileID: 2928185755385661800, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6
+      value: 2.1381712
       objectReference: {fileID: 0}
     - target: {fileID: 2928185755385661800, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.00000023841858
+      value: 1.4792645
       objectReference: {fileID: 0}
     - target: {fileID: 2928185755385661800, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9993238
+      value: -0.9539156
+      objectReference: {fileID: 0}
+    - target: {fileID: 2928185755385661800, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.29781386
       objectReference: {fileID: 0}
     - target: {fileID: 2928185755385661800, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.03676966
+      value: 0.03509887
+      objectReference: {fileID: 0}
+    - target: {fileID: 2928185755385661800, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.010957758
       objectReference: {fileID: 0}
     - target: {fileID: 2978987094880857943, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_Name
       value: Torso
       objectReference: {fileID: 0}
+    - target: {fileID: 2990305709661512787, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.04287
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990305709661512787, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -21.750814
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990305709661512787, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.12231946
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075450646163305011, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.547455
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075450646163305011, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.286912
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075450646163305011, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.18618941
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206253460953026659, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451997373297413757, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Sources.Array.data[0].sourceTransform
+      value: 
+      objectReference: {fileID: 1701300808}
+    - target: {fileID: 3542232964926492964, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 3573980341623740170, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584460855048852895, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.884333
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584460855048852895, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.6918392
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584460855048852895, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2784122
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612878459487368808, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015764346968609400, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157416983278694369, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 4291362660282956090, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 4297920187348560355, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.04287
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297920187348560355, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -21.750814
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297920187348560355, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.12231946
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382784627528554639, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.14468135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382784627528554639, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.17868
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382784627528554639, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.73432034
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606988323463459232, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.587465
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606988323463459232, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.726526
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606988323463459232, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.14272481
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723980052166370410, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4917456749091035737, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: targetCamera
       value: 
       objectReference: {fileID: 1701300807}
+    - target: {fileID: 5234603492946654588, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234603492946654588, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234603492946654588, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234603492946654588, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249726205269342466, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.5957456
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249726205269342466, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -27.662943
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249726205269342466, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.74745893
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662507159532559229, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.5229087
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662507159532559229, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -21.67081
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662507159532559229, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.20606995
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180210815866452708, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180210815866452708, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180210815866452708, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180210815866452708, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313174572852511826, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 6323970916571425622, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.3979252
@@ -840,32 +1188,180 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6638261877806752982, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.005879092
+      value: -0.00000015250407
       objectReference: {fileID: 0}
     - target: {fileID: 6638261877806752982, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24.399998
+      value: 24.400002
       objectReference: {fileID: 0}
     - target: {fileID: 6638261877806752982, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.07978265
+      value: -0.080001354
       objectReference: {fileID: 0}
     - target: {fileID: 6638261877806752982, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6638261877806752982, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.00002335757
+      propertyPath: m_LocalRotation.x
+      value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 6638261877806752982, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638261877806752982, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -9.313226e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867391141419037134, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867391141419037134, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867391141419037134, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867391141419037134, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 7116444181374780838, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
     - target: {fileID: 7268149224031835379, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: m_Name
       value: Head
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599343725063250771, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599343725063250771, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularXLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599343725063250771, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.damper
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599343725063250771, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_AngularYZLimitSpring.spring
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612962287338344805, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.744587
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612962287338344805, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 36.954403
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612962287338344805, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.31092876
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664282397608066504, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 7958493413374569775, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.884317
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958493413374569775, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.6913689
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958493413374569775, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.23273455
+      objectReference: {fileID: 0}
+    - target: {fileID: 7989955508365136560, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8178100525166260247, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
       propertyPath: targetCamera
       value: 
       objectReference: {fileID: 1701300807}
+    - target: {fileID: 8439544347124598851, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516501445484406625, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.115822
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516501445484406625, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -27.74294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516501445484406625, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5473232
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516501445484406625, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.004474172
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516501445484406625, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0000000013969838
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516501445484406625, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000017025739
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516501445484406625, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.99999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531994912163770508, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 8546625031052519077, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.03509887
+      objectReference: {fileID: 0}
+    - target: {fileID: 8546625031052519077, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.010957758
+      objectReference: {fileID: 0}
+    - target: {fileID: 8546625031052519077, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9539156
+      objectReference: {fileID: 0}
+    - target: {fileID: 8546625031052519077, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.29781386
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586009343918884988, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1701300807}
+    - target: {fileID: 8748086097150771384, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Sources.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748086097150771384, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Sources.Array.data[0].weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748086097150771384, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Sources.Array.data[0].sourceTransform
+      value: 
+      objectReference: {fileID: 1701300808}
+    - target: {fileID: 9100175278121183083, guid: 64720fa8abf50bd4eb526fc24381bc1f, type: 3}
+      propertyPath: m_Mass
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
