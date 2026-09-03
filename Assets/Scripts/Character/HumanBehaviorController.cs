@@ -14,15 +14,13 @@ public class HumanBehaviorController : MonoBehaviour
     public RagdollPowerProfile ragdollProfile;   // every bone = Unpowered
 
     public KeyCode ragdollKey = KeyCode.Mouse1;
-
-    private Animator animator;
+    
     private NavMeshAgent agent;
     private HumanAI human;
     private bool isRagdolled;
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         human = GetComponent<HumanAI>();
     }
@@ -36,6 +34,12 @@ public class HumanBehaviorController : MonoBehaviour
     {
         if (Input.GetKeyDown(ragdollKey))
             SetRagdollState(!isRagdolled);
+
+        var sprites = GetComponentsInChildren<HumanBodyPart>();
+        foreach (var sprite in  sprites)
+        {
+            sprite.transform.rotation = Quaternion.LookRotation(-sprite.targetCamera.transform.forward);
+        }
     }
 
     void SetRagdollState(bool ragdollActive)
@@ -51,7 +55,5 @@ public class HumanBehaviorController : MonoBehaviour
 
         agent.enabled = !ragdollActive;
         human.enabled = !ragdollActive;
-        // Animator can stay on — it keeps posing the Target, which only
-        // matters while bones are Kinematic anyway.
     }
 }

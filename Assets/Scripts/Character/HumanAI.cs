@@ -10,13 +10,11 @@ public class HumanAI : MonoBehaviour
 
     //Internal
     private NavMeshAgent humanAgent;
-    private Animator humanAnim;
     private float waitTimer;
 
     void Awake()
     {
         humanAgent = GetComponent<NavMeshAgent>();
-        humanAnim = GetComponent<Animator>();
     }
 
     private void OnEnable() => PickNewDest();
@@ -24,7 +22,6 @@ public class HumanAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        humanAnim.SetFloat("Speed", humanAgent.velocity.magnitude);
 
         if (!humanAgent.pathPending && humanAgent.remainingDistance <= humanAgent.stoppingDistance)
         {
