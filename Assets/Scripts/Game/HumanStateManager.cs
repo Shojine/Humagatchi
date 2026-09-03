@@ -322,6 +322,15 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         if(entertainment > 100) entertainment = 100;
         if(fear > 100) fear = 100;
 
+        if (health < 0) health = 0;
+        if (hunger < 0) hunger = 0;
+        if (thirst < 0) thirst = 0;
+        if (cleanliness < 0) cleanliness = 0;
+        if (energy < 0) energy = 0;
+        if (happiness < 0) happiness = 0;
+        if (entertainment < 0) entertainment = 0;
+        if (fear < 0) fear = 0;
+
         NotifyHumanSubscribers();
     }
 
