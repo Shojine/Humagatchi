@@ -19,7 +19,7 @@ Though you’ll come to find humans are quite a handful. In this pet simulator y
 # Running the project
 ## Dependencies
 - Unity 6000.3.12f1
-
+### Steps
 - Clone the Repo
 - Open Hub
 - Locate the Project folder
