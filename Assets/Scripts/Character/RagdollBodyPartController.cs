@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RagdollBodyPartController : MonoBehaviour, IClickable, IPointerClickHandler
+public class RagdollBodyPartController : MonoBehaviour, IClickable
 {
     private RagdollController parent;
 
@@ -25,9 +25,4 @@ public class RagdollBodyPartController : MonoBehaviour, IClickable, IPointerClic
         
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Clicked bitch");
-        parent.SetRagdollState(RagdollState.Slapped);
-    }
 }
