@@ -60,10 +60,23 @@ public class OptionButton : MonoBehaviour
     {
         if (currentAction.type == "purchase")
         {
-            if (GameManager.Instance.RequestTotalMoney() >= currentAction.cost) GameManager.Instance.AddMoney(-currentAction.cost);
-            else return;
+            if (GameManager.Instance.RequestTotalMoney() >= currentAction.cost)
+            {
+                AudioManager.Instance.PlayPurchaseSFX();
+                GameManager.Instance.AddMoney(-currentAction.cost);
+            }
+            else
+            {
+                AudioManager.Instance.PlayFailSFX();
+                return;
+            }
         }
-        else if (currentAction.type == "activity") GameManager.Instance.AddTime(0, currentAction.cost, 0);
+        else if (currentAction.type == "activity")
+        {
+            AudioManager.Instance.PlayActivityClick();
+            GameManager.Instance.AddTime(0, currentAction.cost, 0);
+        }
+        else AudioManager.Instance.PlayActionClick();
 
         HumanStateManager.Instance.ChangeHumanState(currentAction.changes);
         PickNewAction();
