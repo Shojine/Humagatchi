@@ -90,16 +90,6 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
             _instance = this;
         }
 
-        if( startingHealth<= 100 && startingHealth >= 0) health = startingHealth;
-        if( startingHunger <= 100 && startingHunger >= 0) hunger = startingHunger;
-        if( startingThirst <= 100 && startingThirst >= 0) thirst = startingThirst;
-        if( startingCleanliness <= 100 && startingCleanliness >= 0) cleanliness = startingCleanliness;
-        if(  startingEnergy <= 100 && startingEnergy >= 0) energy = startingEnergy;
-        if( startingEntertainment <= 100 && startingEntertainment >= 0) entertainment = startingEntertainment;
-        if( startingFear <= 100 && startingFear >= 0) fear = startingFear;
-
-        happiness = ((health + hunger + thirst + cleanliness + energy + entertainment) / 6) - fear;
-
         healthTimer = healthChangeTime;
         hungerTimer = hungerDecreaseTime;
         thirstTimer = thirstDecreaseTime;
@@ -311,15 +301,6 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         entertainment += stateChange.entertainmentChange;
         fear += stateChange.fearChange;
 
-        if(health > 100) health = 100;
-        if(hunger > 100) hunger = 100;
-        if(thirst > 100) thirst = 100;
-        if(cleanliness > 100) cleanliness = 100;
-        if(energy > 100) energy = 100;
-        if(happiness > 100) happiness = 100;
-        if(entertainment > 100) entertainment = 100;
-        if(fear > 100) fear = 100;
-
         NotifyHumanSubscribers();
     }
 
@@ -414,17 +395,6 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         {
             fear = data.HumanFear;
         }
-
-        if (health > 100) health = 100;
-        if (hunger > 100) hunger = 100;
-        if (thirst > 100) thirst = 100;
-        if (cleanliness > 100) cleanliness = 100;
-        if (energy > 100) energy = 100;
-        if (happiness > 100) happiness = 100;
-        if (entertainment > 100) entertainment = 100;
-        if (fear > 100) fear = 100;
-
-        NotifyHumanSubscribers();
     }
 
     public void SaveData(ref GameData data)
@@ -446,10 +416,8 @@ public class HumanStateManager : MonoBehaviour, IDataPersistence
         thirst = startingThirst;
         cleanliness = startingCleanliness;
         energy = startingEnergy;
+        happiness = 100;
         entertainment = startingEntertainment;
         fear = startingFear;
-        happiness = ((health + hunger + thirst + cleanliness + energy + entertainment) / 6) - fear;
-
-        NotifyHumanSubscribers();
     }
 }
