@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - LooseLimb
+  - Expression
   layers:
   - Default
   - TransparentFX
