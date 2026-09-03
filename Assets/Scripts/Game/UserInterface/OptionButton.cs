@@ -1,84 +1,79 @@
 using TMPro;
 using UnityEngine;
 
+public enum InteractionType
+{
+    PURCHASE,
+    ACTIVITY,
+    ACTION
+}
+
 public class OptionButton : MonoBehaviour
 { 
     [SerializeField] private GameObject moneys;
     [SerializeField] private GameObject hours;
     [SerializeField] private GameObject mood;
-    [SerializeField] private GameObject moodArrow;
 
     [SerializeField] private TMP_Text optionText;
     [SerializeField] private TMP_Text moneysText;
     [SerializeField] private TMP_Text hoursText;
 
-    private ActionOption currentAction;
+    // TEMPORARY should be randomized actions later
+    [SerializeField] private string optionName;
+    [SerializeField] private InteractionType interactionType;
+    [SerializeField] private int cost;
+    [SerializeField] private float healthChange;
+    [SerializeField] private float hungerChange;
+    [SerializeField] private float thirstChange;
+    [SerializeField] private float cleanlinessChange;
+    [SerializeField] private float energyChange;
+    [SerializeField] private float happinessChange; //happiness to anger/sadness scale
+    [SerializeField] private float entertainmentChange;
+    [SerializeField] private float fearChange;
 
     void Start()
     {
-        PickNewAction();
-    }
-
-    public void PickNewAction()
-    {
-        ActionOption newAction = ResourceManager.Instance.GetAction();
-
-        optionText.text = newAction.name;
+        optionText.text = optionName;
 
         moneys.SetActive(false);
         hours.SetActive(false);
         mood.SetActive(false);
 
-        switch (newAction.type)
+        switch (interactionType)
         {
-            case "purchase":
+            case InteractionType.PURCHASE: 
                 moneys.SetActive(true);
-                moneysText.text = newAction.cost.ToString();
+                moneysText.text = cost.ToString();
                 break;
-            case "activity":
+            case InteractionType.ACTIVITY:
                 hours.SetActive(true);
-                hoursText.text = $"{newAction.cost} hrs";
+                hoursText.text = $"{cost} hrs";
                 break;
-            case "action":
+            case InteractionType.ACTION:
                 mood.SetActive(true);
-                if (newAction.changes.happinessChange > 0)
-                {
-                    if (moodArrow.transform.rotation.x != 180) moodArrow.transform.Rotate(Vector3.left, 180);
-                }
-                else
-                {
-                    if (moodArrow.transform.rotation.x != 0) moodArrow.transform.Rotate(Vector3.left, 180);
-                }
                 break;
         }
-
-        if (currentAction != null) ResourceManager.Instance.FreeAction(currentAction);
-        currentAction = newAction;
     }
 
     public void OnClick()
     {
-        if (currentAction.type == "purchase")
+        if (interactionType == InteractionType.PURCHASE)
         {
-            if (GameManager.Instance.RequestTotalMoney() >= currentAction.cost)
-            {
-                AudioManager.Instance.PlayPurchaseSFX();
-                GameManager.Instance.AddMoney(-currentAction.cost);
-            }
-            else
-            {
-                AudioManager.Instance.PlayFailSFX();
-                return;
-            }
+            if (GameManager.Instance.RequestTotalMoney() >= cost) GameManager.Instance.AddMoney(-cost);
+            else return;
         }
-        else if (currentAction.type == "activity")
-        {
-            AudioManager.Instance.PlayActivityClick();
-            GameManager.Instance.AddTime(0, currentAction.cost, 0);
-        }
-        else AudioManager.Instance.PlayActionClick();
+        else if (interactionType == InteractionType.ACTIVITY) GameManager.Instance.AddTime(0, cost, 0);
 
-        HumanStateManager.Instance.ChangeHumanState(currentAction.changes);
-        PickNewAction();
+        HumanStateChange stateChange = new();
+        stateChange.healthChange = healthChange;
+        stateChange.hungerChange = hungerChange;
+        stateChange.thirstChange = thirstChange;
+        stateChange.cleanlinessChange = cleanlinessChange;
+        stateChange.energyChange = energyChange;
+        stateChange.happinessChange = happinessChange;
+        stateChange.entertainmentChange = entertainmentChange;
+        stateChange.fearChange = fearChange;
+
+        HumanStateManager.Instance.ChangeHumanState(stateChange);
     }
 }
