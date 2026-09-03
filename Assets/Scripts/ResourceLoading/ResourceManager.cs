@@ -39,10 +39,10 @@ public class ResourceManager : MonoBehaviour
     public ActionOption GetAction()
     {
         // this is a horrible way to do this
-        int index = random.Next(0, actionOptions.actions.Length - 1);
+        int index = random.Next(0, actionOptions.actions.Length);
         while (actionsInUse.Contains(index))
         {
-            index = random.Next(0, actionOptions.actions.Length - 1);
+            index = random.Next(0, actionOptions.actions.Length);
         }
 
         Debug.Log(index);
