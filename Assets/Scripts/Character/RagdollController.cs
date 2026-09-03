@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+
 public enum RagdollState
 {
-    Standing,
+    Standing, 
     Standing_Waiting,
-    Fallen,
+    Fallen, 
     Slapped,
     Dead
 }

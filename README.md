@@ -1,7 +1,7 @@
 <img width="1200" height="240" alt="Title" src="https://github.com/user-attachments/assets/74958a80-869d-4d2a-a009-c8e4cca4bd02" />
 
 # - Work In Progress Productions 
-### Ry Ellender, Lace Hall, Tim Caelus, Zach Stasiak, Trinten Tatar
+### Ry Ellender, Lace Hall, Tim Posselt, Zach Stasiak, Trinten Tata
 
 Do you enjoy *Tamagotchi* but wish it were more human? 
 
