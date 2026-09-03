@@ -22,7 +22,7 @@ public class HumanAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (humanAgent)
         if (!humanAgent.pathPending && humanAgent.remainingDistance <= humanAgent.stoppingDistance)
         {
             waitTimer += Time.deltaTime;
